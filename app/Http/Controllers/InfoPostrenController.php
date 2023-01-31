@@ -8,16 +8,18 @@ use App\Models\InfoPostren;
 
 class InfoPostrenController extends Controller
 {
-    public function edit(InfoPostren $infoPostren)
+    public function edit()
     {
-        return view('info_postren.edit');
+        $infoPostren = InfoPostren::find(1)->get();
+        return view('info_postren.edit', compact('infoPostren'));
     }
 
     public function update(UpdateInfoPostrenRequest $request, InfoPostren $infoPostren)
     {
         $infoPostren->update($request->validated());
 
-        return to_route('info_postren.edit')->with('status', 'success');
+        return view('info_postren.edit', compact('infoPostren'));
+        // return to_route('info-postren.edit');
     }
 
 }

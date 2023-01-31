@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_yayasan');
             $table->string('nama_postren');
             $table->string('alamat');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

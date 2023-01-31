@@ -29,12 +29,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/info-postren', function () {
+        $infoPostren = InfoPostren::find(1);
+        return view('info_postren.edit', compact('infoPostren'));
+    }
+    )->name('info-postren.edit');
+    Route::patch('/info-postren', [InfoPostren::class, 'update'])->name('info-postren.update');
+
+    Route::resource('pasien', Pasien::class);
+
+    Route::resource('obat', Obat::class);
 });
-
-Route::resource('info-postren', InfoPostren::class);
-
-Route::resource('pasien', Pasien::class);
-
-Route::resource('obat', Obat::class);
 
 require __DIR__.'/auth.php';
