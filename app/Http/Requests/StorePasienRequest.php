@@ -13,7 +13,7 @@ class StorePasienRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StorePasienRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama_lengkap' => 'required',
+            'dob' => 'required|date',
+            'jenis_kelamin' => 'required|in:1,2',
+            'nik' => 'required',
+            'phone' => 'required',
+            'alamat' => 'nullable',
+            'alergi' => 'required'
         ];
     }
 }

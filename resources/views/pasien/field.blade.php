@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('info-postren.update') }}" class="mt-6 space-y-6">
+<form method="post" action="{{ route('.update') }}" class="mt-6 space-y-6">
     @csrf
     @method('patch')
 

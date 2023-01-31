@@ -13,7 +13,7 @@ class UpdateInfoPostrenRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateInfoPostrenRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama_yayasan',
+            'nama_postren',
+            'alamat'
         ];
     }
 }
