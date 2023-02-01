@@ -16,6 +16,11 @@ class Pasien extends Model
         'nik',
         'phone',
         'alamat',
-        'alergi'
+        'alergi',
+        'kategori',
+        'no_rekam_medis',
+        'nama_wali',
+        'status_kawin',
+        'Agama'
     ];
 }

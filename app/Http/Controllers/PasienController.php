@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
+use Carbon\Carbon;
 
 class PasienController extends Controller
 {
@@ -16,6 +17,10 @@ class PasienController extends Controller
     {
         // $pasiens = Pasien::paginate(15);
         $pasiens = Pasien::all();
+
+        foreach ($pasiens as $pasien) {
+            $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+        }
 
         return view('pasien.index', compact('pasiens'));
     }
