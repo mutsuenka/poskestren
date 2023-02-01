@@ -14,7 +14,10 @@ class PasienController extends Controller
      */
     public function index()
     {
-        return view('pasien.index');
+        // $pasiens = Pasien::paginate(15);
+        $pasiens = Pasien::all();
+
+        return view('pasien.index', compact('pasiens'));
     }
 
     /**

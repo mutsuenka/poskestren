@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use App\Models\InfoPostren;
-use App\Models\Obat;
-use App\Models\Pasien;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
     )->name('info-postren.edit');
     Route::patch('/info-postren', [InfoPostren::class, 'update'])->name('info-postren.update');
 
-    Route::resource('pasien', Pasien::class);
+    Route::resource('pasien', PasienController::class);
 
-    Route::resource('obat', Obat::class);
+    Route::resource('obat', ObatController::class);
 });
 
 require __DIR__.'/auth.php';
