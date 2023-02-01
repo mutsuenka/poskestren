@@ -30,7 +30,12 @@ class StorePasienRequest extends FormRequest
             'nik' => 'required',
             'phone' => 'required',
             'alamat' => 'nullable',
-            'alergi' => 'required'
+            'alergi' => 'required',
+            'status_kawin' => 'nullable',
+            'kategori' => 'required',
+            'no_rekam_medis' => 'nullable',
+            'nama_wali' => 'required',
+            'agama' => 'required'
         ];
     }
 }
