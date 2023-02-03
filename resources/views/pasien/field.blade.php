@@ -1,3 +1,4 @@
+
 <form method="post" action="{{ route('pasien.store') }}" class="mt-6 space-y-6">
     @csrf
 
@@ -12,14 +13,8 @@
     </div>
 
     <div class="flex align-middle">
-        <x-input-label for="no_rekam_medis" :value="__('Nomor Rekam Medis')" class="w-48 mt-4" />
-        <x-text-input id="no_rekam_medis" name="no_rekam_medis" type="text" class="mt-1 block w-full" :value="old('no_rekam_medis')" required autofocus autocomplete="no_rekam_medis" />
-        <x-input-error class="mt-2" :messages="$errors->get('no_rekam_medis')" />
-    </div>
-
-    <div class="flex align-middle">
         <x-input-label for="nik" :value="__('NIK')" class="w-48 mt-4" />
-        <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik')" required autofocus autocomplete="nik" />
+        <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik')" autofocus autocomplete="nik" />
         <x-input-error class="mt-2" :messages="$errors->get('nik')" />
     </div>
 
@@ -39,14 +34,14 @@
 
     <div class="flex align-middle">
         <x-input-label for="dob" :value="__('Tanggal Lahir')" class="w-48 mt-4" />
-        <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
+        <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('dob')">
         <x-input-error class="mt-2" :messages="$errors->get('dob')" />
     </div>
 
     <!-- Jenis Kelamin -->
     <div class="flex align-middle">
         <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" class="w-48 mt-4" />
-        <select name="jenis_kelamin" id="jenis_kelamin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
+        <select name="jenis_kelamin" id="jenis_kelamin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('jenis_kelamin')">
             <option value="">--</option>
             <option value="1">Laki-laki</option>
             <option value="2">Perempuan</option>
@@ -56,24 +51,39 @@
 
     <!-- Status Kawin -->
     <div class="flex align-middle">
-        <x-input-label for="status_kawin" :value="__('Sudah menikah?')" class="w-48 mt-4" />
-        <select name="status_kawin" id="status_kawin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
+        <x-input-label for="status_kawin" :value="__('Sudah Menikah?')" class="w-48 mt-4" />
+        <select name="status_kawin" id="status_kawin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('status_kawin')">
             <option value="">--</option>
-            <option value="true">Sudah</option>
-            <option value="false">Belum</option>
+            <option value="1">Sudah</option>
+            <option value="0">Belum</option>
         </select>
         <x-input-error class="mt-2" :messages="$errors->get('status_kawin')" />
     </div>
 
+    <!-- Agama -->
+    <div class="flex align-middle">
+        <x-input-label for="agama" :value="__('Agama')" class="w-48 mt-4" />
+        <select name="agama" id="agama" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="agama">
+            <option value="">--</option>
+            <option value="Islam">Islam</option>
+            <option value="Kristen Protestan">Kristen Protestan</option>
+            <option value="Katolik">Katolik</option>
+            <option value="Buddha">Buddha</option>
+            <option value="Hindu">Hindu</option>
+            <option value="Kong Hu Chu">Kong Hu Chu</option>
+        </select>
+        <x-input-error class="mt-2" :messages="$errors->get('agama')" />
+    </div>
+
     <div class="flex align-middle">
         <x-input-label for="phone" :value="__('Nomor Telepon')" class="w-48 mt-4" />
-        <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" required autofocus autocomplete="phone" />
+        <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" autofocus autocomplete="phone" />
         <x-input-error class="mt-2" :messages="$errors->get('phone')" />
     </div>
 
     <div class="flex align-middle">
         <x-input-label for="alamat" :value="__('Alamat')" class="w-48 mt-4" />
-        <x-text-area id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat')" required autofocus autocomplete="alamat"></x-text-area>
+        <x-text-area id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat')" autofocus autocomplete="alamat"></x-text-area>
         <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
     </div>
 

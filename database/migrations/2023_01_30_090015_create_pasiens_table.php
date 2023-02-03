@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->date('dob');
             $table->tinyInteger('jenis_kelamin');
-            $table->string('nik');
+            $table->string('nik')->unique();
             $table->string('phone');
             $table->text('alamat')->nullable();
             $table->text('alergi');

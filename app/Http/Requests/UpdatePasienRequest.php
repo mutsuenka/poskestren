@@ -13,7 +13,7 @@ class UpdatePasienRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdatePasienRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nik' => 'nullable',
+            'nama_lengkap' => 'required',
+            'nama_wali' => 'required',
+            'dob' => 'required',
+            'jenis_kelamin' => 'required',
+            'status_kawin' => 'required',
+            'agama' => 'required',
+            'phone' => 'nullable',
+            'alamat' => 'nullable',
+            'alergi' => 'required'
         ];
     }
 }

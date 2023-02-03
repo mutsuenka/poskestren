@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
+use App\Models\RekamMedis;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Request;
 
 class PasienController extends Controller
 {
@@ -13,10 +15,15 @@ class PasienController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $pasiens = Pasien::paginate(15);
-        $pasiens = Pasien::all();
+        $keyword = $request->keyword;
+
+        $pasiens = Pasien::where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
+            // ->where('no_rekam_medis', 'LIKE', '%'.$keyword.'%')
+            ->paginate(10);
+        // $pasiens = Pasien::all();
+        $pasiens->keyword = $keyword;
 
         foreach ($pasiens as $pasien) {
             $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
@@ -41,7 +48,35 @@ class PasienController extends Controller
      */
     public function store(StorePasienRequest $request)
     {
-        Pasien::create($request->validated());
+        $lastNoRM = Pasien::where('kategori', $request->kategori)->count('id');
+        // dd($lastNoRM);
+        $currentRM = $lastNoRM + 1;
+        $format = "%04d";
+        $currentRM = sprintf($format, $currentRM);
+
+        switch ($request->kategori) {
+            case 'Umum':
+                $prefixRM = 'U';
+                break;
+            case 'Santri':
+                $prefixRM = 'S';
+                break;
+            case 'Asatidzah':
+                $prefixRM = 'A';
+                break;
+            default:
+                $prefixRM = 'U';
+                break;
+        }
+
+
+        $NoRM = $prefixRM . '-' . $currentRM;
+        // dd($NoRM);
+
+        $validatedData = $request->validated();
+        $validatedData['no_rekam_medis'] = $NoRM;
+
+        Pasien::create($validatedData);
 
         return to_route('pasien.index')->with('status', 'Data Pasien berhasil dibuat');
     }
@@ -53,7 +88,14 @@ class PasienController extends Controller
      */
     public function show(Pasien $pasien)
     {
-        //
+        $visits = RekamMedis::where('pasien_id', $pasien->id)->get();
+        $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+        $pasien->jenis_kelamin == 1 ? $pasien->jenis_kelamin = 'Laki-laki' : $pasien->jenis_kelamin = 'Perempuan';
+
+        $pasien->status_kawin == 1 ? $pasien->status_kawin = 'Sudah' : $pasien->status_kawin = 'Belum';
+
+        return view('pasien.show', compact('pasien', 'visits'));
     }
 
     /**
@@ -63,7 +105,9 @@ class PasienController extends Controller
      */
     public function edit(Pasien $pasien)
     {
-        //
+        $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+        return view('pasien.edit', compact('pasien'));
     }
 
     /**
@@ -74,7 +118,9 @@ class PasienController extends Controller
      */
     public function update(UpdatePasienRequest $request, Pasien $pasien)
     {
-        //
+        $pasien->update($request->validated());
+
+        return to_route('pasien.index')->with('message', 'berhasil updater');
     }
 
     /**
@@ -84,6 +130,6 @@ class PasienController extends Controller
      */
     public function destroy(Pasien $pasien)
     {
-        //
+        return to_route('pasien.index')->with('message', 'Data pasien tidak bisa dihapus');
     }
 }
