@@ -18,10 +18,15 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->date('dob');
             $table->tinyInteger('jenis_kelamin');
-            $table->string('nik')->unique();
-            $table->string('phone');
+            $table->string('nik')->unique()->nullable();
+            $table->string('phone')->nullable();
             $table->text('alamat')->nullable();
             $table->text('alergi');
+            $table->string('kategori')->default('Umum');
+            $table->string('no_rekam_medis');
+            $table->string('nama_wali')->nullable();
+            $table->boolean('status_kawin');
+            $table->string('Agama')->default('Islam');
             $table->timestamps();
         });
     }

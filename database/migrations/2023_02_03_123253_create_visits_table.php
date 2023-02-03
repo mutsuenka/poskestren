@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('pasiens', function (Blueprint $table) {
-            $table->string('kategori')->default('Umum');
-            $table->string('no_rekam_medis');
-            $table->string('nama_wali')->nullable();
-            $table->boolean('status_kawin');
-            $table->string('Agama')->default('Islam');
+        Schema::create('visits', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('visits');
     }
 };
