@@ -27,13 +27,13 @@ class StorePasienRequest extends FormRequest
             'nama_lengkap' => 'required',
             'dob' => 'required|date',
             'jenis_kelamin' => 'required|in:1,2',
-            'nik' => 'required',
-            'phone' => 'required',
+            'nik' => 'nullable|',
+            'phone' => 'nullable',
             'alamat' => 'nullable',
             'alergi' => 'required',
-            'status_kawin' => 'nullable',
+            'status_kawin' => 'nullable|boolean',
             'kategori' => 'required',
-            'no_rekam_medis' => 'nullable',
+            // 'no_rekam_medis' => 'nullable',
             'nama_wali' => 'required',
             'agama' => 'required'
         ];
