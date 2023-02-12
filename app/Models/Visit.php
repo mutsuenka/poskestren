@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pasien;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Visit extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        // antrian
         'pasien_id',
         'tanggal_visit',
         'no_antrian',
         'status',
+        // vital
         'vital_tekanan_darah',
         'vital_nadi',
         'vital_suhu',
@@ -23,6 +26,7 @@ class Visit extends Model
         'vital_gcs',
         'vital_berat_badan',
         'vital_tinggi_badan',
+        // visit
         'keluhan_utama',
         'riwayat_penyakit_dulu',
         'riwayat_penyakit_sekarang',
@@ -38,6 +42,6 @@ class Visit extends Model
 
     public function pasien()
     {
-        $this->belongsTo(Pasien::class);
+        return $this->belongsTo(Pasien::class);
     }
 }

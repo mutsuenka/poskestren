@@ -14,6 +14,13 @@
         <x-input-error class="mt-2" :messages="$errors->get('pasien_id')" />
     </div>
 
+    <div class="flex align-middle">
+        <x-input-label for="pasien_id" :value="__('')" class="w-36 mt-4" />
+        <div>
+            <a href="{{ route('pasien.create') }}" class="bg-teal-700 hover:bg-teal-600 text-white p-2 rounded-lg">+ Pasien Baru</a>
+        </div>
+    </div>
+
     <!-- Tanggal Visit -->
 
     <div class="flex align-middle">

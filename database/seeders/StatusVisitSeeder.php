@@ -15,10 +15,10 @@ class StatusVisitSeeder extends Seeder
      */
     public function run()
     {
-        $statuses = ['Dalam Antrian', 'Pemeriksaan Dokter', 'Menunggu Obat', 'Selesai'];
+        $statuses = ['Dalam Antrian', 'Pemeriksaan Dokter', 'Menunggu Obat', 'Selesai', 'No Show'];
 
         foreach ($statuses as $status) {
-            DB::table('master_status_visit')->insert([
+            DB::table('master_status_visits')->insert([
                 'nama_status' => $status
             ]);
         }

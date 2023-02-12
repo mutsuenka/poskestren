@@ -21,11 +21,11 @@
                 <th scope="col" class="px-6 py-3">
                     Tanggal Visit
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Nomor Rekam Medis
+                <th scope="col" class="px-6 py-3 text-center">
+                    Antrian ke-
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nomor antrian
+                    Nomor Rekam Medis
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Nama Pasien
@@ -50,22 +50,21 @@
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $visit->tanggal_visit }}
                 </th>
-                <td class="px-6 py-4">
-                    {{ $visit->no_rekam_medis }}
-                </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center">
                     {{ $visit->no_antrian }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $visit->pasien()->nama_lengkap }}
+                    {{ $visit->pasien->no_rekam_medis }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $visit->status }}
+                    {{ $visit->pasien->nama_lengkap }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $visit->nama_status }}
                 </td>
                 <td class="px-6 py-4 flex gap-4">
-                    <a href="{{ route('visit.edit', $visit->id)}}" class="font-medium text-teal-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="{{ route('visit.editVital', $visit->id)}}" class="font-medium text-teal-600 dark:text-blue-500 hover:underline">Vital</a>
-                    <a href="{{ route('visit.editVisit', $visit->id)}}" class="font-medium text-teal-600 dark:text-blue-500 hover:underline">Periksa</a>
+                    <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
+                    <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
                 </td>
             </tr>
             @endforeach

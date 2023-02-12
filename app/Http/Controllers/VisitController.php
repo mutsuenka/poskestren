@@ -2,112 +2,139 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Visit;
-use App\Models\Pasien;
 use App\Models\MasterStatusVisit;
-use App\Http\Requests\UpdateVisitVitalRequest;
-use Illuminate\Http\Client\Request;
+use App\Models\Pasien;
+use App\Models\Visit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class VisitController extends Controller
 {
-    /**
-     * Menampilkan data visit sebagai data antrian.
-     *
-     */
     public function index()
     {
-        $visits = Visit::where('tanggal_visit', Carbon::Today())
-            ->whereNull('deleted_at')
+        $visits = Visit::where('tanggal_visit', Carbon::today())
+            ->orderBy('status', 'ASC')
+            ->orderBy('no_antrian', 'ASC')
             ->paginate();
 
-        return view('visit.index', compact('visits'));
+        $today = Carbon::today()->format('d M Y');
+
+
+        foreach ($visits as $visit) {
+            $status = MasterStatusVisit::where('id', $visit->status)->get();
+
+            $visit['nama_status'] = $status[0]->nama_status;
+
+        }
+
+        return view('visit.index', compact('visits', 'today'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     */
     public function create()
     {
-        $statuses = MasterStatusVisit::all();
         $pasiens = Pasien::whereNull('deleted_at')->get();
 
-        return view('visit.create', compact('statuses', 'pasiens'));
-    }
+        $statuses = MasterStatusVisit::all();
 
+        return view('visit.create', compact('pasiens', 'statuses'));
+    }
 
     public function store(Request $request)
     {
-        dd($request);
-        $validatedData = $request->validated();
+        $visit_initial = new Visit();
+        $input = $request->all();
 
-        $no_antrian = Visit::where('tanggal_visit', Carbon::today())->pluck('no_antrian')->last();
+        $no_antrian = Visit::where('tanggal_visit', $input['tanggal_visit'])->count();
 
-        $validatedData['no_antrian'] = $no_antrian + 1;
 
-        Visit::create($validatedData);
+        $visit_initial->pasien_id = $input['pasien_id'];
+        $visit_initial->tanggal_visit = $input['tanggal_visit'];
+        $visit_initial->no_antrian = $no_antrian + 1;
+        $visit_initial->status = $input['status'];
 
-        return to_route('visit.index')->with('status', 'success');
+        $visit_initial->save();
+
+        return to_route('visit.index')->with('message', 'sukses');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Visit  $visit
-     */
-    public function show(Visit $visit)
+    public function edit(Visit $visit, string $type)
     {
-        //
+        switch ($type) {
+            case 'vital':
+                $view = 'visit.edit-vital';
+                break;
+            case 'visit':
+                $view = 'visit.edit-visit';
+                break;
+            default:
+                $view = 'visit.edit';
+                break;
+        }
+
+        $pasien = Pasien::find($visit->pasien_id);
+
+        $visit->pasien_age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+        $visit->jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
+
+
+        return view($view, compact('visit'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Visit  $visit
-     */
-    public function edit(Visit $visit)
+
+
+    public function update(Request $request, Visit $visit, string $type)
     {
-        return view('visit.edit', compact('visit'));
+        $input = $request->all();
+
+        if ($type == 'vital') {
+            $visit->vital_tekanan_darah = $input['vital_tekanan_darah'];
+            $visit->vital_nadi = $input['vital_nadi'];
+            $visit->vital_suhu = $input['vital_suhu'];
+            $visit->vital_respiratory_rate = $input['vital_respiratory_rate'];
+            $visit->vital_spo = $input['vital_spo'];
+            $visit->vital_vas = $input['vital_vas'];
+            $visit->vital_gcs = $input['vital_gcs'];
+            $visit->vital_berat_badan = $input['vital_berat_badan'];
+            $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
+            $visit->save();
+        } else {
+            $visit->keluhan_utama = $input['keluhan_utama'];
+            $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
+            $visit->riwayat_penyakit_sekarang = $input['riwayat_penyakit_sekarang'];
+            $visit->riwayat_penyakit_keluarga = $input['riwayat_penyakit_keluarga'];
+            $visit->sg_kepala_leher = $input['sg_kepala_leher'];
+            $visit->sg_thorax = $input['sg_thorax'];
+            $visit->sg_cob = $input['sg_cob'];
+            $visit->sg_abdomen = $input['sg_abdomen'];
+            $visit->sg_ekstremitas = $input['sg_ekstremitas'];
+            $visit->status_lokalis = $input['status_lokalis'];
+            $visit->diagnosa = $input['diagnosa'];
+            $visit->planning = $input['planning'];
+            $visit->status = 3;
+            $visit->save();
+        }
+
+        return to_route('visit.index')->with('message', 'Clear');
     }
 
-    public function editVital(Visit $visit)
+    public function panggil(Visit $visit)
     {
-        return view('visit.edit-vital', compact('visit'));
+        $visit->status = 2;
+        $visit->save();
+
+        return to_route('visit.index')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' telah dipanggil');
     }
 
-    public function editVisit(Visit $visit)
+    public function noShow(Visit $visit)
     {
-        return view('visit.edit-visit', compact('visit'));
+        $visit->status = 5;
+        $visit->save();
+
+        return to_route('visit.index')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dinyatakan no show');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateVisitVitalRequest  $request
-     * @param  \App\Models\Visit  $visit
-     */
-    public function updateVital(UpdateVisitVitalRequest $request, Visit $visit)
-    {
-        $visit->update($request->validated());
-
-        return to_route('visit.index')->with('message', 'Data vital pasien berhasil dimasukkan');
-    }
-
-    public function update(UpdateVisitRequest $request, Visit $visit)
-    {
-        $visit->update($request->validated());
-
-        return to_route('visit.index')->with('message', 'Data visit berhasil ditambahkan');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Visit  $visit
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Visit $visit)
+    public function postVisitUpdate(Visit $visit)
     {
 
     }

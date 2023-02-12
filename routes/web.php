@@ -38,11 +38,16 @@ Route::middleware('auth')->group(function () {
     )->name('info-postren.edit');
     Route::patch('/info-postren', [InfoPostren::class, 'update'])->name('info-postren.update');
 
-    Route::resource('pasien', PasienController::class);
+    Route::resource('pasien', PasienController::class)->middleware('auth');
 
-    Route::resource('obat', ObatController::class);
+    Route::resource('obat', ObatController::class)->middleware('auth');
 
-    Route::resource('visit', VisitController::class);
+    // Route::resource('visit', VisitController::class)->except('edit')->middleware('auth');
+    Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
+    Route::get('/visit/create', [VisitController::class, 'create'])->name('visit.create');
+    Route::post('/visit', [VisitController::class, 'store'])->name('visit.store');
+    Route::put('/visit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
+    Route::get('/visit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
 });
 
 require __DIR__.'/auth.php';
