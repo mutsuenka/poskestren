@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use App\Models\Pasien;
-use App\Models\Visit;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -85,15 +84,13 @@ class PasienController extends Controller
      */
     public function show(Pasien $pasien)
     {
-//        $visits = Visit::where('pasien_id', $pasien->id)->get();
-        $visits = Visit::where('pasien_id', $pasien->id)->get();
         $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
 
         $pasien->jenis_kelamin == 1 ? $pasien->jenis_kelamin = 'Laki-laki' : $pasien->jenis_kelamin = 'Perempuan';
 
         $pasien->status_kawin == 1 ? $pasien->status_kawin = 'Sudah' : $pasien->status_kawin = 'Belum';
 
-        return view('pasien.show', compact('pasien', 'visits'));
+        return view('pasien.show', compact('pasien'));
     }
 
     /**
