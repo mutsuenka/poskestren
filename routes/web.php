@@ -3,6 +3,7 @@
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VisitController;
 use App\Models\InfoPostren;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('pasien', PasienController::class);
 
     Route::resource('obat', ObatController::class);
+
+    Route::resource('visit', VisitController::class);
 });
 
 require __DIR__.'/auth.php';

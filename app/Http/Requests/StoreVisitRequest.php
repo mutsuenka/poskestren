@@ -13,7 +13,7 @@ class StoreVisitRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreVisitRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'is_pasien' => 'required',
+            'tanggal_visit' => 'required'
         ];
     }
 }

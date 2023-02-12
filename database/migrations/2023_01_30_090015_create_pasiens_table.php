@@ -26,8 +26,11 @@ return new class extends Migration
             $table->string('no_rekam_medis');
             $table->string('nama_wali')->nullable();
             $table->boolean('status_kawin');
-            $table->string('Agama')->default('Islam');
+            $table->string('agama')->default('Islam');
+            $table->string('pendidikan')->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

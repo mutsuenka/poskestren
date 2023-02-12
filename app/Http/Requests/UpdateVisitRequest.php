@@ -13,6 +13,10 @@ class UpdateVisitRequest extends FormRequest
      */
     public function authorize()
     {
+        if (auth()->user()->is_dokter == 1) {
+            return true;
+        }
+
         return false;
     }
 
@@ -24,7 +28,16 @@ class UpdateVisitRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'keluhan_utama' => 'required',
+            'riwayat_penyakit_dulu' => 'nullable',
+            'riwayat_penyakit_sekarang' => 'nullable',
+            'riwayat_penyakit_keluarga' => 'nullable',
+            'sg_kepala_leher' => 'nullable',
+            'sg_thorax' => 'nullable',
+            'sg_cob' => 'nullable',
+            'sg_ekstremitas' => 'nullable',
+            'diagnosa' => 'required',
+            'planning' => 'required'
         ];
     }
 }

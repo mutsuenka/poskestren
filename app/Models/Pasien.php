@@ -23,4 +23,9 @@ class Pasien extends Model
         'status_kawin',
         'Agama'
     ];
+
+    public function visit()
+    {
+        $this->hasMany(Visit::class);
+    }
 }

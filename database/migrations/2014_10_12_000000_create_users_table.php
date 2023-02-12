@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->tinyInteger('is_dokter')->default(1);
+            $table->tinyInteger('is_perawat')->default(0);
             $table->string('izin_praktek')->nullable();
             $table->timestamps();
         });
