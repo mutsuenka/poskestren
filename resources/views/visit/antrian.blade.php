@@ -64,6 +64,7 @@
                 </td>
                 <td class="px-6 py-4 flex gap-4">
                     <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
+                    <a href="{{ route('visit.panggil', $visit->id)}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Panggil</a>
                     <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
                 </td>
             </tr>

@@ -5,6 +5,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VisitController;
 use App\Models\InfoPostren;
+use App\Models\Visit;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/visit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
     Route::get('/visit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::get('/visit/{visit}', [VisitController::class, 'show'])->name('visit.show');
+    Route::put('/visit/{visit}/panggil', [VisitController::class, 'panggil'])->name('visit.panggil');
+    Route::put('/visit/{visit}/noshow', [VisitController::class, 'noShow'])->name('visit.noshow');
+    Route::put('/visit/{visit}/done', [VisitController::class, 'serahkanObat'])->name('visit.obat');
 });
 
 require __DIR__.'/auth.php';

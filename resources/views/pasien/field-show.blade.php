@@ -57,7 +57,7 @@
     <!-- Agama -->
     <div class="flex align-middle">
         <x-input-label for="Agama" :value="__('Agama')" class="w-48 mt-4" />
-        <x-text-input id="Agama" name="Agama" type="text" class="mt-1 block w-full" :value="$pasien->Agama" disabled/>
+        <x-text-input id="Agama" name="Agama" type="text" class="mt-1 block w-full" :value="$pasien->agama" disabled/>
     </div>
 
     <div class="flex align-middle">

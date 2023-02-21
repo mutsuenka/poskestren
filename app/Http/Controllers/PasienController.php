@@ -9,6 +9,8 @@ use App\Models\MasterStatusVisit;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use Symfony\Component\HttpFoundation\Request;
+use App\Notifications\sendPrescriptionNotification;
+use Illuminate\Notifications\Notification;
 
 class PasienController extends Controller
 {

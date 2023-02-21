@@ -17,6 +17,7 @@
         <!-- Scripts -->
         <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -123,7 +124,7 @@
                         </a>
                     </li>
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
-                        <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-base font-medium
+                        <a href="{{ route('visit.farmasi') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path fill-rule="evenodd" d="M7.502 6h7.128A3.375 3.375 0 0118 9.375v9.375a3 3 0 003-3V6.108c0-1.505-1.125-2.811-2.664-2.94a48.972 48.972 0 00-.673-.05A3 3 0 0015 1.5h-1.5a3 3 0 00-2.663 1.618c-.225.015-.45.032-.673.05C8.662 3.295 7.554 4.542 7.502 6zM13.5 3A1.5 1.5 0 0012 4.5h4.5A1.5 1.5 0 0015 3h-1.5z" clip-rule="evenodd" />
@@ -135,7 +136,7 @@
                 </ul>
                 <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
-                        <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-base font-medium
+                        <a href="{{ route('visit.farmasi') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                 <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />

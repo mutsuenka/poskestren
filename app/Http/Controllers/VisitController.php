@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\MasterStatusVisit;
 use App\Models\Pasien;
 use App\Models\Visit;
+use App\Notifications\sendPrescriptionNotification;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -106,6 +108,7 @@ class VisitController extends Controller
             $visit->vital_gcs = $input['vital_gcs'];
             $visit->vital_berat_badan = $input['vital_berat_badan'];
             $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
+            $visit->status = 2;
             $visit->save();
 
             session()->flash('status', 'success');
@@ -123,35 +126,56 @@ class VisitController extends Controller
             $visit->status_lokalis = $input['status_lokalis'];
             $visit->diagnosa = $input['diagnosa'];
             $visit->planning = $input['planning'];
-            $visit->status = 3;
-            $visit->nama_dokter = auth()->user()->id;
+            $visit->status = 4;
+            $visit->nama_dokter = auth()->user()->name;
             $visit->save();
 
             session()->flash('status', 'success');
-            session()->flash('message', 'Pengecekan pasien sudah selesai, data pasien berhasil disimpan.')
+            session()->flash('message', 'Pengecekan pasien sudah selesai, data pasien berhasil disimpan.');
+
+            $prescription = [
+                'nama_lengkap' => $visit->pasien->nama_lengkap,
+                'plan' => $visit->planning
+            ];
+
+            $visit->notify(new sendPrescriptionNotification($prescription));
+
         }
 
-        return to_route('visit.index')->with('message', 'Clear');
+        return to_route('visit.index');
+    }
+
+    public function farmasi()
+    {
+        $visits = Visit::where('status', 4)->paginate();
+        $today = Carbon::today()->format('d M Y');
+
+        dd($visits);
+
+        return view('visit.farmasi', compact('visits', 'today'));
     }
 
     public function panggil(Visit $visit)
     {
-        $visit->status = 2;
+        $visit->status = 3;
         $visit->save();
 
-        return to_route('visit.index')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' telah dipanggil');
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dalam proses pemeriksaan dokter');
     }
 
     public function noShow(Visit $visit)
     {
+        $visit->status = 6;
+        $visit->save();
+
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dinyatakan no show');
+    }
+
+    public function serahkanObat(Visit $visit)
+    {
         $visit->status = 5;
         $visit->save();
 
-        return to_route('visit.index')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dinyatakan no show');
-    }
-
-    public function postVisitUpdate(Visit $visit)
-    {
-
+        return to_route('visit.farmasi')->with('status', 'success')->with('message', 'Obat pasien ' . $visit->pasien->nama_lengkap . ' telah diserahkan.');
     }
 }
