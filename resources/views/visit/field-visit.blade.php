@@ -87,6 +87,6 @@
     </div>
 
     <div class="flex items-center gap-4">
-        <x-primary-button>{{ __('Update Data Vital Pasien') }}</x-primary-button>
+        <x-primary-button>{{ __('Catat Hasil Pemeriksaan') }}</x-primary-button>
     </div>
 </form>

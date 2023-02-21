@@ -5,6 +5,6 @@
         </h2>
     </x-slot:header>
 
-    @include('visit.table')
+    @include('visit.antrian')
 
 </x-admin-layout>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Visit;
+use App\Models\Pasien;
+use App\Models\MasterStatusVisit;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
-use App\Models\Pasien;
-use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 
 class PasienController extends Controller
@@ -74,7 +76,7 @@ class PasienController extends Controller
 
         Pasien::create($validatedData);
 
-        return to_route('pasien.index')->with('status', 'Data Pasien berhasil dibuat');
+        return to_route('pasien.index')->with('message', 'Rekam Medis Pasien berhasil dibuat.')->with('status', 'success');
     }
 
     /**
@@ -90,7 +92,24 @@ class PasienController extends Controller
 
         $pasien->status_kawin == 1 ? $pasien->status_kawin = 'Sudah' : $pasien->status_kawin = 'Belum';
 
-        return view('pasien.show', compact('pasien'));
+        $pasien_age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+        $jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
+
+        $visits = Visit::where('pasien_id', $pasien->id)->paginate();
+
+        foreach ($visits as $visit) {
+            $status = MasterStatusVisit::where('id', $visit->status)->get();
+
+            $visit['nama_status'] = $status[0]->nama_status;
+
+            $visit->pasien_age = $pasien_age;
+
+            $visit->jenis_kelamin = $jenis_kelamin;
+
+        }
+
+        return view('pasien.show', compact('pasien', 'visits'));
     }
 
     /**
@@ -115,7 +134,7 @@ class PasienController extends Controller
     {
         $pasien->update($request->validated());
 
-        return to_route('pasien.index')->with('message', 'berhasil updater');
+        return to_route('pasien.index')->with('status', 'success')->with('message', 'Data pasien berhasil di-update.');
     }
 
     /**

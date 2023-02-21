@@ -5,7 +5,6 @@
         </h2>
     </x-slot:header>
 
-
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4 p-4 bg-gray-5">
         <form class="pb-4 bg-gray-5 dark:bg-gray-900 flex justify-between" action="" method="GET">
             <label for="table-search" class="sr-only">Search</label>

@@ -22,13 +22,13 @@
                     Tanggal Visit
                 </th>
                 <th scope="col" class="px-6 py-3 text-center">
+                    Antrian ke-
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Nomor Rekam Medis
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Nama Pasien
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Keluhan Utama
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Diagnosa
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
@@ -51,26 +51,20 @@
                     {{ $visit->tanggal_visit }}
                 </th>
                 <td class="px-6 py-4 text-center">
+                    {{ $visit->no_antrian }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $visit->pasien->no_rekam_medis }}
+                </td>
+                <td class="px-6 py-4">
                     {{ $visit->pasien->nama_lengkap }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $visit->keluhan_utama }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $visit->diagnosa }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $visit->nama_status }}
                 </td>
                 <td class="px-6 py-4 flex gap-4">
-                    @if ($visit->status < 4)
-                        <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded text-center shadow-md">Catat Vital</a>
-                        <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded text-center shadow-md">Periksa Pasien</a>
-                    @else
-                        <a href="{{ route('visit.show', $visit->id)}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded text-center shadow-md">Lihat Visit</a>
-
-                    @endif
-
+                    <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
+                    <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
                 </td>
             </tr>
             @endforeach

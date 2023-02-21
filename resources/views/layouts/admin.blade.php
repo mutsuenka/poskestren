@@ -10,10 +10,14 @@
         <!-- Fonts -->
 {{--        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">--}}
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+
     <link href="https://fonts.bunny.net/css?family=arvo:400|ubuntu:400i" rel="stylesheet" />
 
         <!-- Scripts -->
         <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
@@ -162,6 +166,13 @@
                     </div>
                 </header>
             @endif
+
+            <!-- flash message -->
+            <div class="mt-6">
+                @if (session()->has('status'))
+                    <x-flash-message :status="session()->get('status')">{{ session()->get('message') }}</x-flash-message>
+                @endif
+            </div>
 
             <!-- Page Content -->
             <main>

@@ -41,6 +41,7 @@ return new class extends Migration
             $table->text('diagnosa')->nullable();
             $table->text('planning')->nullable();
             $table->tinyInteger('status')->default('0');
+            $table->text('nama_dokter');
             $table->timestamps();
             $table->softDeletes();
         });

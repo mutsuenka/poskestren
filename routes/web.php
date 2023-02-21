@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/visit', [VisitController::class, 'store'])->name('visit.store');
     Route::put('/visit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
     Route::get('/visit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
+    Route::get('/visit/{visit}', [VisitController::class, 'show'])->name('visit.show');
 });
 
 require __DIR__.'/auth.php';

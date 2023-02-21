@@ -54,7 +54,18 @@ class VisitController extends Controller
 
         $visit_initial->save();
 
-        return to_route('visit.index')->with('message', 'sukses');
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Antrian dengan nomor antrian' . $visit_initial->no_antrian . ' telah ditambahkan');
+    }
+
+    public function show(Visit $visit)
+    {
+        $pasien = $visit->pasien;
+
+        $visit->pasien_age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+        $visit->jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
+
+        return view('visit.show', compact('visit'));
     }
 
     public function edit(Visit $visit, string $type)
@@ -81,8 +92,6 @@ class VisitController extends Controller
         return view($view, compact('visit'));
     }
 
-
-
     public function update(Request $request, Visit $visit, string $type)
     {
         $input = $request->all();
@@ -98,6 +107,9 @@ class VisitController extends Controller
             $visit->vital_berat_badan = $input['vital_berat_badan'];
             $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
             $visit->save();
+
+            session()->flash('status', 'success');
+            session()->flash('message', 'Data vital berhasil disimpan.');
         } else {
             $visit->keluhan_utama = $input['keluhan_utama'];
             $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
@@ -112,7 +124,11 @@ class VisitController extends Controller
             $visit->diagnosa = $input['diagnosa'];
             $visit->planning = $input['planning'];
             $visit->status = 3;
+            $visit->nama_dokter = auth()->user()->id;
             $visit->save();
+
+            session()->flash('status', 'success');
+            session()->flash('message', 'Pengecekan pasien sudah selesai, data pasien berhasil disimpan.')
         }
 
         return to_route('visit.index')->with('message', 'Clear');

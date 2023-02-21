@@ -3,7 +3,9 @@
     @csrf
 
     <div class="flex align-middle">
-        <x-input-label for="kategori" :value="__('Kategori')" class="w-48 mt-4" />
+        <x-input-label for="kategori" class="w-48 mt-4">
+            Kategori <span class="text-red-400">*</span>
+        </x-input-label>
         <select name="kategori" id="kategori" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
             <option value="Umum">Umum</option>
             <option value="Santri">Santri</option>
@@ -19,7 +21,9 @@
     </div>
 
     <div class="flex align-middle">
-        <x-input-label for="nama_lengkap" :value="__('Nama Lengkap')" class="w-48 mt-4" />
+        <x-input-label for="nama_lengkap" class="w-48 mt-4">
+            Nama Lengkap <span class="text-red-400">*</span>
+        </x-input-label>
         <x-text-input id="nama_lengkap" name="nama_lengkap" type="text" class="mt-1 block w-full" :value="old('nama_lengkap')" required autofocus autocomplete="nama_lengkap" />
         <x-input-error class="mt-2" :messages="$errors->get('nama_lengkap')" />
     </div>
@@ -33,14 +37,18 @@
     <!-- DOB -->
 
     <div class="flex align-middle">
-        <x-input-label for="dob" :value="__('Tanggal Lahir')" class="w-48 mt-4" />
+        <x-input-label for="dob" class="w-48 mt-4">
+            Tanggal Lahir <x-mandatory/>
+        </x-input-label>
         <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('dob')">
         <x-input-error class="mt-2" :messages="$errors->get('dob')" />
     </div>
 
     <!-- Jenis Kelamin -->
     <div class="flex align-middle">
-        <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" class="w-48 mt-4" />
+        <x-input-label for="jenis_kelamin" class="w-48 mt-4">
+            Jenis Kelamin <x-mandatory />
+        </x-input-label>
         <select name="jenis_kelamin" id="jenis_kelamin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('jenis_kelamin')">
             <option value="">--</option>
             <option value="1">Laki-laki</option>
@@ -51,7 +59,9 @@
 
     <!-- Status Kawin -->
     <div class="flex align-middle">
-        <x-input-label for="status_kawin" :value="__('Sudah Menikah?')" class="w-48 mt-4" />
+        <x-input-label for="status_kawin" class="w-48 mt-4">
+            Sudah menikah?<x-mandatory />
+        </x-input-label>
         <select name="status_kawin" id="status_kawin" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('status_kawin')">
             <option value="">--</option>
             <option value="1">Sudah</option>
@@ -88,7 +98,9 @@
     </div>
 
     <div class="flex align-middle">
-        <x-input-label for="alergi" :value="__('alergi')" class="w-48 mt-4" />
+        <x-input-label for="alergi" class="w-48 mt-4">
+            Alergi<x-mandatory />
+        </x-input-label>
         <x-text-area id="alergi" name="alergi" type="text" class="mt-1 block w-full" :value="old('alergi')" required autofocus autocomplete="alergi"></x-text-area>
         <x-input-error class="mt-2" :messages="$errors->get('alergi')" />
     </div>
