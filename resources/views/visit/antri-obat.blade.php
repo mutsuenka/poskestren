@@ -7,7 +7,7 @@
             </div>
             <input type="text" id="table-search" name="keyword" value="{{  old('keyword') }}" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
         </div>
-        <a href="{{ route('visit.create') }}" class="block py-2 px-4 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500 shadow-lg">Tambahkan Visit</a>
+        {{-- <a href="{{ route('visit.create') }}" class="block p-2 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500">Tambahkan Visit</a> --}}
     </form>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">
@@ -19,16 +19,16 @@
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Tanggal Visit
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
                     Antrian ke-
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 text-center">
                     Nomor Rekam Medis
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Nama Pasien
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Resep
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
@@ -48,28 +48,22 @@
                     </div>
                 </td>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $visit->tanggal_visit }}
+                    {{ $visit->no_antrian }}
                 </th>
                 <td class="px-6 py-4 text-center">
-                    {{ $visit->no_antrian }}
-                </td>
-                <td class="px-6 py-4">
                     {{ $visit->pasien->no_rekam_medis }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $visit->pasien->nama_lengkap }}
                 </td>
                 <td class="px-6 py-4">
+                    {!! nl2br(e($visit->planning)) !!}
+                </td>
+                <td class="px-6 py-4" data-html="true">
                     {{ $visit->nama_status }}
                 </td>
                 <td class="px-6 py-4 flex gap-4">
-                    @if ($visit->status < 3)
-                        <a href="{{ route('visit.panggil', $visit)}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Panggil</a>
-                    @endif
-                    @if ($visit->status < 4)
-                        <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
-                        <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
-                    @endif
+                    <a href="{{ route('visit.obat', $visit->id)}}" class="font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Selesai</a>
                 </td>
             </tr>
             @endforeach

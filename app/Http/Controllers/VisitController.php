@@ -6,6 +6,7 @@ use App\Models\MasterStatusVisit;
 use App\Models\Pasien;
 use App\Models\Visit;
 use App\Notifications\sendPrescriptionNotification;
+use Carbon\Carbon as CarbonCarbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -147,10 +148,17 @@ class VisitController extends Controller
 
     public function farmasi()
     {
-        $visits = Visit::where('status', 4)->paginate();
+        $visits = Visit::where('status', 4)
+            ->where('tanggal_visit', Carbon::today())
+            ->paginate();
         $today = Carbon::today()->format('d M Y');
 
-        dd($visits);
+        foreach ($visits as $visit) {
+            $status = MasterStatusVisit::where('id', $visit->status)->get();
+
+            $visit['nama_status'] = $status[0]->nama_status;
+
+        }
 
         return view('visit.farmasi', compact('visits', 'today'));
     }

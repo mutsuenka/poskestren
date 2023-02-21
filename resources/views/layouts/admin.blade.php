@@ -33,7 +33,7 @@
                             </svg>
                         </button>
                         <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-                            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+                            <img src="{{ asset('logo_postren.jpeg')}}" class="h-8 mr-3" alt="Poskestren BTS logo" />
                             <span class="self-center text-xl text-white font-semibold sm:text-2xl whitespace-nowrap
                             dark:text-white">Poskestren Baitussalam</span>
                         </a>
@@ -158,11 +158,11 @@
             </div>
         </aside>
 
-        <div class="p-4 sm:ml-64">
+        <div class="p-4 sm:ml-64" style="background-image: url(logo_postren.jpg)">
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow mt-16">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

@@ -45,14 +45,15 @@ Route::middleware('auth')->group(function () {
 
     // Route::resource('visit', VisitController::class)->except('edit')->middleware('auth');
     Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
+    Route::get('/visit/farmasi', [VisitController::class, 'farmasi'])->name('visit.farmasi');
     Route::get('/visit/create', [VisitController::class, 'create'])->name('visit.create');
     Route::post('/visit', [VisitController::class, 'store'])->name('visit.store');
-    Route::put('/visit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
-    Route::get('/visit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
-    Route::get('/visit/{visit}', [VisitController::class, 'show'])->name('visit.show');
-    Route::put('/visit/{visit}/panggil', [VisitController::class, 'panggil'])->name('visit.panggil');
-    Route::put('/visit/{visit}/noshow', [VisitController::class, 'noShow'])->name('visit.noshow');
-    Route::put('/visit/{visit}/done', [VisitController::class, 'serahkanObat'])->name('visit.obat');
+    Route::get('/visit/panggil/{visit}', [VisitController::class, 'panggil'])->name('visit.panggil');
+    Route::get('/visit/noshow/{visit}', [VisitController::class, 'noshow'])->name('visit.noshow');
+    Route::get('/visit/done/{visit}', [VisitController::class, 'serahkanObat'])->name('visit.obat');
+    Route::put('/visit/edit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
+    Route::get('/visit/edit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
+    Route::get('/visit/show/{visit}', [VisitController::class, 'show'])->name('visit.show');
 });
 
 require __DIR__.'/auth.php';
