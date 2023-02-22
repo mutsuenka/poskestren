@@ -3,6 +3,7 @@
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Models\InfoPostren;
 use App\Models\Visit;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('login');
 });
 
 Route::get('/dashboard', function () {
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('obat', ObatController::class)->middleware('auth');
 
+    Route::resource('user', UserController::class);
+
     // Route::resource('visit', VisitController::class)->except('edit')->middleware('auth');
     Route::get('/visit', [VisitController::class, 'index'])->name('visit.index');
     Route::get('/visit/farmasi', [VisitController::class, 'farmasi'])->name('visit.farmasi');
@@ -54,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/visit/edit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
     Route::get('/visit/edit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::get('/visit/show/{visit}', [VisitController::class, 'show'])->name('visit.show');
+
 });
 
 require __DIR__.'/auth.php';

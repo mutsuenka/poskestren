@@ -1,4 +1,4 @@
-<h2 class="font-bold mb-4">Data Vital Pasien</h2>
+<h2 class="font-bold mb-4">Vital Sign Pasien</h2>
 
 <div class="flex mb-4 gap-2">
     <div class="w-1/2 space-y-4">

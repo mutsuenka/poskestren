@@ -1,4 +1,4 @@
-<h3 class="font-bold">Data Vital Pasien</h3>
+<h3 class="font-bold">Vital Sign Pasien</h3>
 
 <form method="post" action="{{ route('visit.update', [$visit->id, 'vital']) }}" class="mt-6 space-y-6">
     @csrf
@@ -66,6 +66,6 @@
     </div>
 
     <div class="flex items-center gap-4">
-        <x-primary-button>{{ __('Update Data Vital Pasien') }}</x-primary-button>
+        <x-primary-button>{{ __('Update Vital Sign Pasien') }}</x-primary-button>
     </div>
 </form>

@@ -113,7 +113,7 @@ class VisitController extends Controller
             $visit->save();
 
             session()->flash('status', 'success');
-            session()->flash('message', 'Data vital berhasil disimpan.');
+            session()->flash('message', 'Vital Sign berhasil disimpan.');
         } else {
             $visit->keluhan_utama = $input['keluhan_utama'];
             $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
