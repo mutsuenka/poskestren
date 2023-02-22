@@ -22,7 +22,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <nav class="fixed top-0 z-50 w-full bg-teal-600 dark:bg-gray-800 dark:border-gray-700">
+        <nav class="fixed top-0 z-50 w-full bg-teal-500 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-start">
@@ -33,7 +33,7 @@
                             </svg>
                         </button>
                         <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-                            <img src="{{ asset('logo_postren.jpeg')}}" class="h-8 mr-3" alt="Poskestren BTS logo" />
+                            <x-application-logo class="w-12 h-12 rounded-full bg-gray-100 p-1 mx-4" />
                             <span class="self-center text-xl text-white font-semibold sm:text-2xl whitespace-nowrap
                             dark:text-white">Poskestren Baitussalam</span>
                         </a>
@@ -81,9 +81,9 @@
         </nav>
 
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform
-        -translate-x-full bg-teal-600 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        -translate-x-full bg-teal-500 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
                aria-label="Sidebar">
-            <div class="h-full px-3 pb-4 overflow-y-auto bg-teal-600 dark:bg-gray-800">
+            <div class="h-full px-3 pb-4 overflow-y-auto bg-teal-500 dark:bg-gray-800">
                 <ul class="space-y-2">
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                         <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-base font-medium
