@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Visit;
 use App\Models\Pasien;
+use App\Exports\PasienExport;
 use App\Models\MasterStatusVisit;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StorePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
+use Illuminate\Notifications\Notification;
 use Symfony\Component\HttpFoundation\Request;
 use App\Notifications\sendPrescriptionNotification;
-use Illuminate\Notifications\Notification;
 
 class PasienController extends Controller
 {
@@ -147,5 +149,10 @@ class PasienController extends Controller
     public function destroy(Pasien $pasien)
     {
         return to_route('pasien.index')->with('message', 'Data pasien tidak bisa dihapus');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PasienExport, 'DataPasien.xlsx');
     }
 }

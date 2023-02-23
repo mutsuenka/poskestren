@@ -40,9 +40,10 @@ Route::middleware('auth')->group(function () {
     )->name('info-postren.edit');
     Route::patch('/info-postren', [InfoPostren::class, 'update'])->name('info-postren.update');
 
-    Route::resource('pasien', PasienController::class)->middleware('auth');
+    Route::get('/pasien/export', [PasienController::class, 'export'])->name('pasien.export');
+    Route::resource('pasien', PasienController::class);
 
-    Route::resource('obat', ObatController::class)->middleware('auth');
+    Route::resource('obat', ObatController::class);
 
     Route::resource('user', UserController::class);
 
@@ -54,7 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/visit/panggil/{visit}', [VisitController::class, 'panggil'])->name('visit.panggil');
     Route::get('/visit/noshow/{visit}', [VisitController::class, 'noshow'])->name('visit.noshow');
     Route::get('/visit/done/{visit}', [VisitController::class, 'serahkanObat'])->name('visit.obat');
-    Route::put('/visit/edit/{visit}/{type}', [VisitController::class, 'update'])->name('visit.update');
+    Route::put('/visit/edit/{visit}/vital', [VisitController::class, 'updateVitalSign'])->name('visit.update-vital');
+    Route::put('/visit/edit/{visit}/pemeriksaan', [VisitController::class, 'updatePemeriksaan'])->name('visit.update-pemeriksaan');
     Route::get('/visit/edit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::get('/visit/show/{visit}', [VisitController::class, 'show'])->name('visit.show');
 

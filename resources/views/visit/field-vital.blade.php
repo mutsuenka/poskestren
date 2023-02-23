@@ -1,6 +1,6 @@
 <h3 class="font-bold">Vital Sign Pasien</h3>
 
-<form method="post" action="{{ route('visit.update', [$visit->id, 'vital']) }}" class="mt-6 space-y-6">
+<form method="post" action="{{ route('visit.update-vital', $visit->id) }}" class="mt-6 space-y-6">
     @csrf
     @method('PUT')
 

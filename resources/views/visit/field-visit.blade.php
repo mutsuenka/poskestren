@@ -1,6 +1,6 @@
 <h3 class="font-bold mb-4">Anamnesis</h3>
 
-<form method="post" action="{{ route('visit.update', [$visit->id, 'visit']) }}" class="mt-6 space-y-6">
+<form method="post" action="{{ route('visit.update-pemeriksaan', $visit->id) }}" class="mt-6 space-y-6">
     @csrf
     @method('PUT')
 

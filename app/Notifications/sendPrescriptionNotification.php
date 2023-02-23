@@ -36,10 +36,19 @@ class sendPrescriptionNotification extends Notification
     public function toTelegram($notifiable)
     {
 
+        // dd($notifiable);
+
         return TelegramMessage::create()
-            ->to('-450298079')
-            ->content('Nama Pasien: *' . $notifiable->pasien->nama_lengkap . '*')
-            ->line('\n')
+            // ->to('-450298079') //testing
+            ->to('-1001281632553') //production, nanti harus dipindah ke env
+            ->content('*Nama Pasien:*')
+            ->line('')
+            ->line($notifiable->pasien->nama_lengkap)
+            ->line('')
+            ->line('*Diagnosa:*')
+            ->line($notifiable->diagnosa)
+            ->line('')
+            ->line('*Resep:*')
             ->line($notifiable->planning);
     }
 }
