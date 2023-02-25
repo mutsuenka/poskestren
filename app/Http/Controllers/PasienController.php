@@ -31,7 +31,11 @@ class PasienController extends Controller
         $pasiens->keyword = $keyword;
 
         foreach ($pasiens as $pasien) {
-            $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+
+            $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun, %m bulan');
+
+            $pasien->dob = Carbon::parse($pasien->dob)->translatedFormat('d F Y');
+
         }
 
         return view('pasien.index', compact('pasiens'));
@@ -71,12 +75,12 @@ class PasienController extends Controller
                 break;
         }
 
-
         $NoRM = $prefixRM . '-' . $currentRM;
         // dd($NoRM);
 
         $validatedData = $request->validated();
         $validatedData['no_rekam_medis'] = $NoRM;
+        $validatedData['dob'] = Carbon::parse($request->dob);
 
         Pasien::create($validatedData);
 
@@ -95,6 +99,8 @@ class PasienController extends Controller
         $pasien->jenis_kelamin == 1 ? $pasien->jenis_kelamin = 'Laki-laki' : $pasien->jenis_kelamin = 'Perempuan';
 
         $pasien->status_kawin == 1 ? $pasien->status_kawin = 'Sudah' : $pasien->status_kawin = 'Belum';
+
+        $pasien->dob = Carbon::parse($pasien->dob)->format('d M Y');
 
         $pasien_age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
 
@@ -123,7 +129,9 @@ class PasienController extends Controller
      */
     public function edit(Pasien $pasien)
     {
-        $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+        $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun %m bulan');
+
+        $pasien->dob = Carbon::parse($pasien->dob)->format('d M Y');
 
         return view('pasien.edit', compact('pasien'));
     }
@@ -136,7 +144,10 @@ class PasienController extends Controller
      */
     public function update(UpdatePasienRequest $request, Pasien $pasien)
     {
-        $pasien->update($request->validated());
+        $validatedData = $request->validated();
+        $validatedData['dob'] = Carbon::parse($request->dob);
+
+        $pasien->update($validatedData);
 
         return to_route('pasien.index')->with('status', 'success')->with('message', 'Data pasien berhasil di-update.');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePasienRequest extends FormRequest
@@ -25,7 +26,7 @@ class StorePasienRequest extends FormRequest
     {
         return [
             'nama_lengkap' => 'required',
-            'dob' => 'required|date',
+            'dob' => 'required',
             'jenis_kelamin' => 'required|in:1,2',
             'nik' => 'nullable|',
             'phone' => 'nullable',

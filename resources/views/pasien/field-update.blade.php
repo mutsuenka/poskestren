@@ -21,7 +21,7 @@
 
     <div class="flex align-middle">
         <x-input-label for="nik" :value="__('NIK')" class="w-48 mt-4" />
-        <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik', $pasien->nik)" required autofocus autocomplete="nik" />
+        <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik', $pasien->nik)" autofocus autocomplete="nik" />
         <x-input-error class="mt-2" :messages="$errors->get('nik')" />
     </div>
 
@@ -41,16 +41,16 @@
 
     <div class="flex align-middle">
         <x-input-label for="dob" :value="__('Tanggal Lahir')" class="w-48 mt-4" />
-        <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="{{ old('dob', $pasien->dob) }}">
+        <x-datepicker :value="old('dob', $pasien->dob)" :name="'dob'" :id="'dob'"></x-datepicker>
         <x-input-error class="mt-2" :messages="$errors->get('dob')" />
     </div>
 
-    @if (isset($pasien))
+    {{-- @if (isset($pasien))
         <div class="flex align-middle">
             <x-input-label for="umur" :value="__('Umur')" class="w-48 mt-4" />
-            <x-input-label for="umur_label" :value="$pasien->age" class="mt-4" />
+            <x-text-input id="umur" name="umur" type="text" class="mt-1 block w-full" :value="old('nama_wali', $pasien->age)" required autofocus autocomplete="umur" disabled/>
         </div>
-    @endif
+    @endif --}}
 
     <!-- Jenis Kelamin -->
     <div class="flex align-middle">

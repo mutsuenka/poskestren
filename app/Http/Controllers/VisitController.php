@@ -20,7 +20,7 @@ class VisitController extends Controller
             ->orderBy('no_antrian', 'ASC')
             ->paginate();
 
-        $today = Carbon::today()->format('d M Y');
+        $today = Carbon::today()->translatedFormat('d F Y');
 
 
         foreach ($visits as $visit) {
@@ -29,6 +29,8 @@ class VisitController extends Controller
             $visit['nama_status'] = $status[0]->nama_status;
 
         }
+
+        // dd($visits->count());
 
         return view('visit.index', compact('visits', 'today'));
     }
@@ -58,7 +60,7 @@ class VisitController extends Controller
 
         $visit_initial->save();
 
-        return to_route('visit.index')->with('status', 'success')->with('message', 'Antrian dengan nomor antrian' . $visit_initial->no_antrian . ' telah ditambahkan');
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Antrian dengan nomor antrian ' . $visit_initial->no_antrian . ' telah ditambahkan');
     }
 
     public function show(Visit $visit)
@@ -205,7 +207,7 @@ class VisitController extends Controller
         $visits = Visit::where('status', 4)
             ->where('tanggal_visit', Carbon::today())
             ->paginate();
-        $today = Carbon::today()->format('d M Y');
+        $today = Carbon::today()->translatedFormat('d F Y');
 
         foreach ($visits as $visit) {
             $status = MasterStatusVisit::where('id', $visit->status)->get();

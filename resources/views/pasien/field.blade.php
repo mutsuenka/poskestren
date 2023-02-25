@@ -12,15 +12,15 @@
             <option value="Santri">Santri</option>
             <option value="Asatidzah">Asatidzah</option>
         </select>
-        <x-input-error class="mt-2" :messages="$errors->get('kategori')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('kategori')" />
 
     <!-- NIK -->
     <div class="flex align-middle">
         <x-input-label for="nik" :value="__('NIK')" class="w-48 mt-4" />
         <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik')" autofocus autocomplete="nik" />
-        <x-input-error class="mt-2" :messages="$errors->get('nik')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('nik')" />
 
     <!--Nama Lengkap-->
     <div class="flex align-middle">
@@ -28,8 +28,8 @@
             Nama Lengkap <span class="text-red-400">*</span>
         </x-input-label>
         <x-text-input id="nama_lengkap" name="nama_lengkap" type="text" class="mt-1 block w-full" :value="old('nama_lengkap')" required autofocus autocomplete="nama_lengkap" />
-        <x-input-error class="mt-2" :messages="$errors->get('nama_lengkap')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('nama_lengkap')" />
 
     <!-- Nama Wali -->
     <div class="flex align-middle">
@@ -43,9 +43,9 @@
         <x-input-label for="dob" class="w-48 mt-4">
             Tanggal Lahir <x-mandatory/>
         </x-input-label>
-        <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="old('dob')">
-        <x-input-error class="mt-2" :messages="$errors->get('dob')" />
+        <x-datepicker :value="old('dob')" :name="'dob'" :id="'dob'"></x-datepicker>
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('dob')" />
 
     <!-- Jenis Kelamin -->
     <div class="flex align-middle">
@@ -57,8 +57,8 @@
             <option value="1">Laki-laki</option>
             <option value="2">Perempuan</option>
         </select>
-        <x-input-error class="mt-2" :messages="$errors->get('jenis_kelamin')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('jenis_kelamin')" />
 
     <!-- Status Kawin -->
     <div class="flex align-middle">
@@ -70,8 +70,8 @@
             <option value="1">Sudah</option>
             <option value="0">Belum</option>
         </select>
-        <x-input-error class="mt-2" :messages="$errors->get('status_kawin')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('status_kawin')" />
 
     <!-- Agama -->
     <div class="flex align-middle">
@@ -85,36 +85,36 @@
             <option value="Hindu">Hindu</option>
             <option value="Kong Hu Chu">Kong Hu Chu</option>
         </select>
-        <x-input-error class="mt-2" :messages="$errors->get('agama')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('agama')" />
 
     <!-- Nomor Telepon -->
     <div class="flex align-middle">
         <x-input-label for="phone" :value="__('Nomor Telepon')" class="w-48 mt-4" />
         <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" autofocus autocomplete="phone" />
-        <x-input-error class="mt-2" :messages="$errors->get('phone')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('phone')" />
 
      <!-- Pendidikan -->
      <div class="flex align-middle">
         <x-input-label for="pendidikan" :value="__('Pendidikan')" class="w-48 mt-4" />
         <x-text-input id="pendidikan" name="pendidikan" type="text" class="mt-1 block w-full" :value="old('pendidikan')" autofocus autocomplete="pendidikan" />
-        <x-input-error class="mt-2" :messages="$errors->get('pendidikan')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('pendidikan')" />
 
      <!-- Pekerjaan -->
      <div class="flex align-middle">
         <x-input-label for="pekerjaan" :value="__('Pekerjaan')" class="w-48 mt-4" />
         <x-text-input id="pekerjaan" name="pekerjaan" type="text" class="mt-1 block w-full" :value="old('pekerjaan')" autofocus autocomplete="pekerjaan" />
-        <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
 
     <!-- Alamat -->
     <div class="flex align-middle">
         <x-input-label for="alamat" :value="__('Alamat')" class="w-48 mt-4" />
         <x-text-area id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat')" autofocus autocomplete="alamat"></x-text-area>
-        <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
 
     <!-- Alergi -->
     <div class="flex align-middle">
@@ -122,8 +122,8 @@
             Alergi<x-mandatory />
         </x-input-label>
         <x-text-area id="alergi" name="alergi" type="text" class="mt-1 block w-full" :value="old('alergi')" required autofocus autocomplete="alergi"></x-text-area>
-        <x-input-error class="mt-2" :messages="$errors->get('alergi')" />
     </div>
+    <x-input-error class="mt-2" :messages="$errors->get('alergi')" />
 
     <div class="flex items-center gap-4">
         <x-primary-button>{{ __('Buat Pasien Baru') }}</x-primary-button>

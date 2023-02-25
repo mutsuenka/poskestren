@@ -1,7 +1,5 @@
 
-<form method="post" action="{{ route('pasien.update', $pasien) }}" class="mt-6 space-y-6">
-    @csrf
-    @method('PUT')
+<div class="mt-6 space-y-2">
 
     <div class="flex align-middle">
         <x-input-label for="kategori" :value="__('Kategori')" class="w-48 mt-4" />
@@ -32,7 +30,7 @@
 
     <div class="flex align-middle">
         <x-input-label for="dob" :value="__('Tanggal Lahir')" class="w-48 mt-4" />
-        <input type="date" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="{{ $pasien->dob }}" disabled>
+        <input type="text" name="dob" id="dob" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" value="{{ $pasien->dob }}" disabled>
     </div>
 
     @if (isset($pasien))
@@ -74,4 +72,4 @@
         <x-input-label for="alergi" :value="__('alergi')" class="w-48 mt-4" />
         <x-text-area id="alergi" name="alergi" type="text" class="mt-1 block w-full" :value="old('alergi', $pasien->alergi)" disabled></x-text-area>
     </div>
-</form>
+</div>
