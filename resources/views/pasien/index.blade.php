@@ -15,10 +15,9 @@
                 <input type="text" id="table-search" name="keyword" value="{{  old('keyword',$pasiens->keyword) }}" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
             </div>
             <div class="flex gap-2">
-                <a href="{{ route('pasien.export') }}" class="block p-2 bg-teal-300 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">Export Data Pasien</a>
-                <a href="{{ route('pasien.create') }}" class="block p-2 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 shadow-md">Tambahkan Pasien</a>
+                <a href="{{ route('pasien.export') }}" class="block p-2 bg-teal-400 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">Export Data Pasien</a>
+                <a href="{{ route('pasien.create') }}" class="block p-2 bg-teal-500 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">Tambahkan Pasien</a>
             </div>
-
         </form>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">

@@ -39,7 +39,9 @@ class VisitController extends Controller
 
         $statuses = MasterStatusVisit::all();
 
-        return view('visit.create', compact('pasiens', 'statuses'));
+        $today = Carbon::today()->format('d M Y');
+
+        return view('visit.create', compact('pasiens', 'statuses', 'today'));
     }
 
     public function store(Request $request)
@@ -49,9 +51,8 @@ class VisitController extends Controller
 
         $no_antrian = Visit::where('tanggal_visit', $input['tanggal_visit'])->count();
 
-
         $visit_initial->pasien_id = $input['pasien_id'];
-        $visit_initial->tanggal_visit = $input['tanggal_visit'];
+        $visit_initial->tanggal_visit = Carbon::parse($input['tanggal_visit']);
         $visit_initial->no_antrian = $no_antrian + 1;
         $visit_initial->status = $input['status'];
 

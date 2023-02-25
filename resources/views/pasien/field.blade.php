@@ -2,6 +2,7 @@
 <form method="post" action="{{ route('pasien.store') }}" class="mt-6 space-y-6">
     @csrf
 
+    <!-- Kategori -->
     <div class="flex align-middle">
         <x-input-label for="kategori" class="w-48 mt-4">
             Kategori <span class="text-red-400">*</span>
@@ -14,12 +15,14 @@
         <x-input-error class="mt-2" :messages="$errors->get('kategori')" />
     </div>
 
+    <!-- NIK -->
     <div class="flex align-middle">
         <x-input-label for="nik" :value="__('NIK')" class="w-48 mt-4" />
         <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik')" autofocus autocomplete="nik" />
         <x-input-error class="mt-2" :messages="$errors->get('nik')" />
     </div>
 
+    <!--Nama Lengkap-->
     <div class="flex align-middle">
         <x-input-label for="nama_lengkap" class="w-48 mt-4">
             Nama Lengkap <span class="text-red-400">*</span>
@@ -28,6 +31,7 @@
         <x-input-error class="mt-2" :messages="$errors->get('nama_lengkap')" />
     </div>
 
+    <!-- Nama Wali -->
     <div class="flex align-middle">
         <x-input-label for="nama_wali" :value="__('Nama Wali')" class="w-48 mt-4" />
         <x-text-input id="nama_wali" name="nama_wali" type="text" class="mt-1 block w-full" :value="old('nama_wali')" required autofocus autocomplete="nama_wali" />
@@ -35,7 +39,6 @@
     </div>
 
     <!-- DOB -->
-
     <div class="flex align-middle">
         <x-input-label for="dob" class="w-48 mt-4">
             Tanggal Lahir <x-mandatory/>
@@ -85,18 +88,35 @@
         <x-input-error class="mt-2" :messages="$errors->get('agama')" />
     </div>
 
+    <!-- Nomor Telepon -->
     <div class="flex align-middle">
         <x-input-label for="phone" :value="__('Nomor Telepon')" class="w-48 mt-4" />
         <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone')" autofocus autocomplete="phone" />
         <x-input-error class="mt-2" :messages="$errors->get('phone')" />
     </div>
 
+     <!-- Pendidikan -->
+     <div class="flex align-middle">
+        <x-input-label for="pendidikan" :value="__('Pendidikan')" class="w-48 mt-4" />
+        <x-text-input id="pendidikan" name="pendidikan" type="text" class="mt-1 block w-full" :value="old('pendidikan')" autofocus autocomplete="pendidikan" />
+        <x-input-error class="mt-2" :messages="$errors->get('pendidikan')" />
+    </div>
+
+     <!-- Pekerjaan -->
+     <div class="flex align-middle">
+        <x-input-label for="pekerjaan" :value="__('Pekerjaan')" class="w-48 mt-4" />
+        <x-text-input id="pekerjaan" name="pekerjaan" type="text" class="mt-1 block w-full" :value="old('pekerjaan')" autofocus autocomplete="pekerjaan" />
+        <x-input-error class="mt-2" :messages="$errors->get('pekerjaan')" />
+    </div>
+
+    <!-- Alamat -->
     <div class="flex align-middle">
         <x-input-label for="alamat" :value="__('Alamat')" class="w-48 mt-4" />
         <x-text-area id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat')" autofocus autocomplete="alamat"></x-text-area>
         <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
     </div>
 
+    <!-- Alergi -->
     <div class="flex align-middle">
         <x-input-label for="alergi" class="w-48 mt-4">
             Alergi<x-mandatory />

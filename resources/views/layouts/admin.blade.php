@@ -18,6 +18,7 @@
         <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
+        {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -32,12 +33,13 @@
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                             </svg>
                         </button>
-                        <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
+                        <a href="#" class="flex ml-2 md:mr-24">
                             <x-application-logo class="w-12 h-12 rounded-full bg-gray-100 p-1 mx-4" />
                             <span class="self-center text-xl text-white font-semibold sm:text-2xl whitespace-nowrap
                             dark:text-white">Poskestren Baitussalam</span>
                         </a>
                     </div>
+                    <!-- User Info -->
                     <div class="flex items-center">
                         <div class="flex items-center ml-3">
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -85,6 +87,8 @@
                aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-teal-500 dark:bg-gray-800">
                 <ul class="space-y-2">
+
+                    <!-- Dashboard -->
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                         <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
@@ -95,6 +99,8 @@
                             <span class="ml-3">Dashboard</span>
                         </a>
                     </li>
+
+                    <!-- Antrian Pasien -->
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                         <a href="{{ route('visit.index') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
@@ -104,25 +110,8 @@
                             <span class="ml-3">Antrian Pasien</span>
                         </a>
                     </li>
-                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4" >
-                        <a href="{{ route('pasien.index') }}" class="flex items-center p-2 text-base font-medium
-                             rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clip-rule="evenodd" />
-                                <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
-                            </svg>
-                            <span class="ml-3">Pasien</span>
-                        </a>
-                    </li>
-                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
-                        <a href="{{ route('obat.index') }}" class="flex items-center p-2 text-base font-medium
-                             rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path d="M5.566 4.657A4.505 4.505 0 016.75 4.5h10.5c.41 0 .806.055 1.183.157A3 3 0 0015.75 3h-7.5a3 3 0 00-2.684 1.657zM2.25 12a3 3 0 013-3h13.5a3 3 0 013 3v6a3 3 0 01-3 3H5.25a3 3 0 01-3-3v-6zM5.25 7.5c-.41 0-.806.055-1.184.157A3 3 0 016.75 6h10.5a3 3 0 012.683 1.657A4.505 4.505 0 0018.75 7.5H5.25z" />
-                            </svg>
-                            <span class="ml-3">Stok Obat</span>
-                        </a>
-                    </li>
+
+                    <!-- Antrian obat -->
                     <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                         <a href="{{ route('visit.farmasi') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
@@ -133,18 +122,55 @@
                             <span class="ml-3">Antrian Resep</span>
                         </a>
                     </li>
+
+                    <!-- Pasien -->
+                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4" >
+                        <a href="{{ route('pasien.index') }}" class="flex items-center p-2 text-base font-medium
+                             rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clip-rule="evenodd" />
+                                <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
+                            </svg>
+                            <span class="ml-3">Pasien</span>
+                        </a>
+                    </li>
+
+                    <!-- Rekam Medis -->
+                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4" >
+                        <a href="{{ route('pasien.index') }}" class="flex items-center p-2 text-base font-medium
+                             rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z" />
+                                <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
+                              </svg>
+                            <span class="ml-3">Rekam Medis</span>
+                        </a>
+                    </li>
+
+                    <!-- Obat -->
+                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
+                        <a href="{{ route('obat.index') }}" class="flex items-center p-2 text-base font-medium
+                             rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M10.5 3.798v5.02a3 3 0 01-.879 2.121l-2.377 2.377a9.845 9.845 0 015.091 1.013 8.315 8.315 0 005.713.636l.285-.071-3.954-3.955a3 3 0 01-.879-2.121v-5.02a23.614 23.614 0 00-3 0zm4.5.138a.75.75 0 00.093-1.495A24.837 24.837 0 0012 2.25a25.048 25.048 0 00-3.093.191A.75.75 0 009 3.936v4.882a1.5 1.5 0 01-.44 1.06l-6.293 6.294c-1.62 1.621-.903 4.475 1.471 4.88 2.686.46 5.447.698 8.262.698 2.816 0 5.576-.239 8.262-.697 2.373-.406 3.092-3.26 1.47-4.881L15.44 9.879A1.5 1.5 0 0115 8.818V3.936z" clip-rule="evenodd" />
+                              </svg>
+                            <span class="ml-3">Stok Obat</span>
+                        </a>
+                    </li>
                 </ul>
                 @if (auth()->user()->role == 4)
                     <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
+                        <!-- Daftar User -->
                         <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                             <a href="{{ route('user.index') }}" class="flex items-center p-2 text-base font-medium
                                 rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                     <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-3">Daftar User Akses</span>
+                                <span class="ml-3">Manajemen User</span>
                             </a>
                         </li>
+                        <!-- Pengelolaan informasi postren -->
                         <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                             <a href="{{ route('info-postren.edit') }}" class="flex items-center p-2 text-base font-medium
                                 rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
@@ -182,5 +208,18 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.select2').select2({
+                    placeholder: "Pilih...",
+                });
+            });
+        </script>
+
     </body>
 </html>
