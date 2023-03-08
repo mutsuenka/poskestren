@@ -10,6 +10,7 @@
         "laravel-notification-channels/telegram": "^3.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/scout": "^10.0",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1"
     },

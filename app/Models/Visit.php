@@ -6,11 +6,11 @@ use App\Models\Pasien;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Scout\Searchable;
 
 class Visit extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Searchable;
 
     protected $fillable = [
         // antrian
@@ -46,4 +46,14 @@ class Visit extends Model
     {
         return $this->belongsTo(Pasien::class);
     }
+
+    // public function toSearchableArray()
+    // {
+    //     $array = $this->toArray();
+
+    //     $array['nama_lengkap'] = $this->pasien['nama_lengkap'];
+    //     $arary['no_rekam_medis'] = $this->pasien['no_rekam_medis'];
+
+    //     return $array;
+    // }
 }

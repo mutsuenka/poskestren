@@ -14,7 +14,12 @@ class UserController extends Controller
     {
         $keyword = $request->keyword;
 
-        $users = User::paginate();
+        if ($keyword) {
+            $users = User::search($keyword)
+                ->paginate();
+        } else {
+            $users = User::paginate();
+        }
 
         $users->keyword = $keyword;
 

@@ -6,19 +6,39 @@ use App\Models\MasterStatusVisit;
 use App\Models\Pasien;
 use App\Models\Visit;
 use App\Notifications\sendPrescriptionNotification;
-use Carbon\Carbon as CarbonCarbon;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
+// use Illuminate\Support\Carbon;
 
 class VisitController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $visits = Visit::where('tanggal_visit', Carbon::today())
-            ->orderBy('status', 'ASC')
-            ->orderBy('no_antrian', 'ASC')
-            ->paginate();
+        $keyword = $request->keyword;
+
+        if ($keyword) {
+            $visits = Visit::with('pasien')
+                ->where('tanggal_visit', Carbon::today())
+                ->where(function($query) use ($keyword) {
+                    $query->where('no_antrian', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('status', 'LIKE', '%'.$keyword.'%')
+                        ->orWhereHas('pasien', function($query) use ($keyword){
+                            $query->where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
+                                ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%');
+                        });
+                })
+                ->orderBy('status', 'ASC')
+                ->orderBy('no_antrian', 'ASC')
+                ->paginate();
+        } else {
+            $visits = Visit::where('tanggal_visit', Carbon::today())
+                ->orderBy('status', 'ASC')
+                ->orderBy('no_antrian', 'ASC')
+                ->paginate();
+        }
+
+        $visits->keyword = $keyword;
 
         $today = Carbon::today()->translatedFormat('d F Y');
 
@@ -51,7 +71,8 @@ class VisitController extends Controller
         $visit_initial = new Visit();
         $input = $request->all();
 
-        $no_antrian = Visit::where('tanggal_visit', $input['tanggal_visit'])->count();
+        $no_antrian = Visit::where('tanggal_visit', Carbon::parse($input['tanggal_visit']))->count();
+        // dd($no_antrian);
 
         $visit_initial->pasien_id = $input['pasien_id'];
         $visit_initial->tanggal_visit = Carbon::parse($input['tanggal_visit']);
@@ -202,11 +223,31 @@ class VisitController extends Controller
         return to_route('visit.index');
     }
 
-    public function farmasi()
+    public function farmasi(Request $request)
     {
-        $visits = Visit::where('status', 4)
-            ->where('tanggal_visit', Carbon::today())
-            ->paginate();
+        $keyword = $request->keyword;
+
+        if ($keyword) {
+            $visits = Visit::with('pasien')
+                ->where('tanggal_visit', Carbon::today())
+                ->where('status', 4)
+                ->where(function($query) use ($keyword) {
+                    $query->where('no_antrian', 'LIKE', '%'.$keyword.'%')
+                        ->orWhereHas('pasien', function($query) use ($keyword){
+                            $query->where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
+                                ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%');
+                        });
+                })
+                ->paginate();
+        } else {
+            $visits = Visit::where('status', 4)
+                ->where('tanggal_visit', Carbon::today())
+                ->paginate();
+        }
+
+        $visits->keyword = $keyword;
+
+
         $today = Carbon::today()->translatedFormat('d F Y');
 
         foreach ($visits as $visit) {

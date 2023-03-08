@@ -24,10 +24,18 @@ class PasienController extends Controller
     {
         $keyword = $request->keyword;
 
-        $pasiens = Pasien::where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
-            // ->where('no_rekam_medis', 'LIKE', '%'.$keyword.'%')
-            ->paginate(10);
-        // $pasiens = Pasien::all();
+        if ($keyword) {
+            $pasiens = Pasien::search($keyword)->paginate(10);
+        } else {
+            $pasiens = Pasien::paginate(10);
+        }
+
+        // $pasiens = Pasien::where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
+        //     ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%')
+        //     ->orWhere('kategori', 'LIKE', '%'.$keyword.'%')
+        //     ->orWhere('nik', 'LIKE', '%'.$keyword.'%')
+        //     ->paginate(10);
+        // // $pasiens = Pasien::all();
         $pasiens->keyword = $keyword;
 
         foreach ($pasiens as $pasien) {

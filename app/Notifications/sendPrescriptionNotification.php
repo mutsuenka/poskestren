@@ -39,8 +39,8 @@ class sendPrescriptionNotification extends Notification
         // dd($notifiable);
 
         return TelegramMessage::create()
-            // ->to('-450298079') //testing
-            ->to('-1001281632553') //production, nanti harus dipindah ke env
+            ->to('-450298079') //testing
+            // ->to('-1001281632553') //production, nanti harus dipindah ke env
             ->content('*Nama Pasien:*')
             ->line('')
             ->line($notifiable->pasien->nama_lengkap)
