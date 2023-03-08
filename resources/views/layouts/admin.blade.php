@@ -136,7 +136,7 @@
                     </li>
 
                     <!-- Rekam Medis -->
-                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4" >
+                    {{-- <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4" >
                         <a href="{{ route('pasien.index') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -145,10 +145,10 @@
                               </svg>
                             <span class="ml-3">Rekam Medis</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Obat -->
-                    <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
+                    {{-- <li class="text-white hover:text-gray-900 hover:bg-gray-100 rounded px-4">
                         <a href="{{ route('obat.index') }}" class="flex items-center p-2 text-base font-medium
                              rounded-lg  hover:text-gray-900 group-hover:text-gray-900">
                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -156,7 +156,7 @@
                               </svg>
                             <span class="ml-3">Stok Obat</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
                 @if (auth()->user()->role == 4)
                     <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
