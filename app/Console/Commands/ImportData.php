@@ -44,6 +44,10 @@ class ImportData extends Command
     {
         // $file = 'tes_impor_data_pasien.xlsx';
         $file = 'data_pasien_siap_impor.xlsx';
+        /*
+        Catatan:
+        di excel, pastikan tanggalnya format text, bukan format date yang bener malahan. Soalnya format date yang bener malah ga bisa diparsing di sistem, dan ga bisa dimasukin as is ke sistem. Yang paling bener emang diketik pake format Y-m-d dengan cell formatting text. Jadi kebaca by import as is sebagai Y-m-d, bukan format lain.
+        */
         Excel::import(new PasienImport, $file);
 
     }
