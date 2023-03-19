@@ -21,7 +21,7 @@ class PasienImport implements ToModel,WithHeadingRow
             'nama_lengkap' => $row['Nama'],
             'nama_wali' => $row['Nama_KK'],
             'dob' => Carbon::parse($row['Tgl_Lahir']),
-            'phone' => $row['No._HP'],
+            'phone' => $row['No_HP'],
             'jenis_kelamin' => $row['Jenis_Kelamin'],
             'alamat' => $row['Alamat'],
             'agama' => $row['Agama'],

@@ -33,7 +33,8 @@ return new class extends Migration
             $table->string('riwayat_penyakit_keluarga')->default('Tidak ada');
             $table->string('sg_kepala_leher')->default('Dalam Batas Normal');
             $table->string('sg_thorax')->default('Dalam Batas Normal');
-            $table->string('sg_cob')->default('Dalam Batas Normal');
+            $table->string('sg_cor')->default('Dalam Batas Normal');
+            $table->string('sg_pulmo')->default('Dalam Batas Normal');
             $table->string('sg_abdomen')->default('Dalam Batas Normal');
             $table->string('sg_ekstremitas')->default('Dalam Batas Normal');
             $table->string('status_lokalis')->nullable();
