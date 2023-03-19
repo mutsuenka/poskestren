@@ -23,7 +23,9 @@ class Pasien extends Model
         'no_rekam_medis',
         'nama_wali',
         'status_kawin',
-        'agama'
+        'agama',
+        'pendidikan',
+        'pekerjaan'
     ];
 
     public function visit()
