@@ -42,7 +42,8 @@ class ImportData extends Command
 
     public function importPasien()
     {
-        $file = 'tes_impor_data_pasien.xlsx';
+        // $file = 'tes_impor_data_pasien.xlsx';
+        $file = 'data_pasien_siap_impor.xlsx';
         Excel::import(new PasienImport, $file);
 
     }

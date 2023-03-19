@@ -87,12 +87,26 @@ class UserController extends Controller
         $request->validate([
             'name' => ['string', 'max:255'],
             'email' => ['string', 'email', 'max:255'],
-            'password' => ['confirmed', Rules\Password::defaults()],
+            'password' => ['confirmed', Rules\Password::defaults(), 'nullable'],
             'phone' => ['string', 'unique:' . User::class],
             'role' => ['numeric']
         ]);
 
-        $user->update();
+        // $user->update([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'phone' => $request->phone,
+        //     'password' => Hash::make($request->password),
+        //     'role' => $request->role
+        // ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
 
         return to_route('user.index')->with('status', 'success')->with('message', 'Data user telah berhasil di-update');
     }

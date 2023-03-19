@@ -13,7 +13,7 @@
                         @csrf
                         @method('PUT')
 
-                        @include('user.field')
+                        @include('user.field-edit')
 
                         <div class="flex items-center gap-4">
                             <x-primary-button>
