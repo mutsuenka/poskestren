@@ -130,7 +130,9 @@ class VisitController extends Controller
         $visit->status_lokalis = $input['status_lokalis'];
         $visit->diagnosa = $input['diagnosa'];
         $visit->planning = $input['planning'];
-        $visit->status = 4;
+        if ($visit->status <= 3) {
+            $visit->status = 4;
+        }
         $visit->nama_dokter = auth()->user()->name;
         $visit->save();
 
@@ -148,6 +150,18 @@ class VisitController extends Controller
     {
         $input = $request->all();
 
+        $request->validate([
+            'vital_tekanan_darah' => 'string|nullable',
+            'vital_nadi' => 'numeric|nullable',
+            'vital_suhu' => 'string|nullable',
+            'vital_respiratory_rate' => 'numeric|nullable',
+            'vital_spo' => 'numeric|nullable',
+            'vital_vas' => 'numeric|nullable',
+            'vital_gcs' => 'numeric|nullable',
+            'vital_berat_badan' => 'numeric|nullable',
+            'vital_tinggi_badan' => 'numeric|nullable'
+        ]);
+
         $visit->vital_tekanan_darah = $input['vital_tekanan_darah'];
         $visit->vital_nadi = $input['vital_nadi'];
         $visit->vital_suhu = $input['vital_suhu'];
@@ -157,7 +171,9 @@ class VisitController extends Controller
         $visit->vital_gcs = $input['vital_gcs'];
         $visit->vital_berat_badan = $input['vital_berat_badan'];
         $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
-        $visit->status = 2;
+        if ($visit->status == 1) {
+            $visit->status = 2;
+        }
         $visit->save();
 
         session()->flash('status', 'success');

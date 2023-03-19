@@ -64,12 +64,14 @@
                         {{ $visit->nama_status }}
                     </td>
                     <td class="px-6 py-4 flex gap-4">
-                        @if ($visit->status < 3)
-                            <a href="{{ route('visit.panggil', $visit)}}" class="align-middle text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Panggil</a>
-                        @endif
-                        @if ($visit->status < 5 && auth()->user()->role != 1)
-                            <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
-                            <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
+                        @if (auth()->user()->role != 1)
+                            @if ($visit->status >= 1)
+                                <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
+                            @endif
+                            @if ($visit->status >= 2)
+                                <a href="{{ route('visit.panggil', $visit)}}" class="align-middle text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Panggil</a>
+                                <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
+                            @endif
                         @endif
                     </td>
                 </tr>
