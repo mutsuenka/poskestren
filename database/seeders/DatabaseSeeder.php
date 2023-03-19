@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
            InfoPostrenSeeder::class,
            PasienSeeder::class,
-           StatusVisitSeeder::class
+           StatusVisitSeeder::class,
+           RoleSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 

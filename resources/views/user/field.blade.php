@@ -23,9 +23,17 @@
     <x-input-label for="role" :value="__('Role')" class="w-48 mt-4" />
     <select name="role" id="role" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full">
 
-        @foreach ($roles as $role)
-            <option value="{{ $role->id }}" @if( $role->id == $user->role) selected @endif>{{ $role->nama_role }} </option>
-        @endforeach
+        @if (isset($user))
+            @foreach ($roles as $role)
+                <option value="{{ $role->id }}" @if( $role->id == $user->role) selected @endif>{{ $role->nama_role }} </option>
+            @endforeach
+        @else
+            @foreach ($roles as $role)
+                <option value="{{ $role->id }}">{{ $role->nama_role }} </option>
+            @endforeach
+        @endif
+
+
 
     </select>
     <x-input-error class="mt-2" :messages="$errors->get('role')" />

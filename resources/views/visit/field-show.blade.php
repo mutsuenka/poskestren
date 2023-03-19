@@ -34,8 +34,13 @@
     </div>
 
     <div class="flex align-middle">
-        <x-input-label for="sg_cob" :value="__('COB')" class="w-48 mt-4" />
-        <x-text-area id="sg_cob" name="sg_cob" type="text" class="mt-1 block w-full" :value="old('sg_cob', $visit->sg_cob)" disabled></x-text-area>
+        <x-input-label for="sg_cor" :value="__('COR')" class="w-48 mt-4" />
+        <x-text-area id="sg_cor" name="sg_cor" type="text" class="mt-1 block w-full" :value="old('sg_cor', $visit->sg_cor)" disabled></x-text-area>
+    </div>
+
+    <div class="flex align-middle">
+        <x-input-label for="sg_pulmo" :value="__('Pulmo')" class="w-48 mt-4" />
+        <x-text-area id="sg_pulmo" name="sg_pulmo" type="text" class="mt-1 block w-full" :value="old('sg_pulmo', $visit->sg_pulmo)" disabled></x-text-area>
     </div>
 
     <div class="flex align-middle">

@@ -97,16 +97,10 @@ class VisitController extends Controller
 
     public function edit(Visit $visit, string $type)
     {
-        switch ($type) {
-            case 'vital':
-                $view = 'visit.edit-vital';
-                break;
-            case 'visit':
-                $view = 'visit.edit-visit';
-                break;
-            default:
-                $view = 'visit.edit';
-                break;
+        if ($type == 'vital') {
+            $view = 'visit.edit-vital';
+        } else {
+            $view = 'visit.edit-visit';
         }
 
         $pasien = Pasien::find($visit->pasien_id);
@@ -129,7 +123,8 @@ class VisitController extends Controller
         $visit->riwayat_penyakit_keluarga = $input['riwayat_penyakit_keluarga'];
         $visit->sg_kepala_leher = $input['sg_kepala_leher'];
         $visit->sg_thorax = $input['sg_thorax'];
-        $visit->sg_cob = $input['sg_cob'];
+        $visit->sg_cor = $input['sg_cor'];
+        $visit->sg_pulmo = $input['sg_pulmo'];
         $visit->sg_abdomen = $input['sg_abdomen'];
         $visit->sg_ekstremitas = $input['sg_ekstremitas'];
         $visit->status_lokalis = $input['status_lokalis'];
@@ -172,56 +167,57 @@ class VisitController extends Controller
     }
 
 
-    public function update(Request $request, Visit $visit, string $type)
-    {
-        $input = $request->all();
+    // public function update(Request $request, Visit $visit, string $type)
+    // {
+    //     $input = $request->all();
 
-        if ($type == 'vital') {
-            $visit->vital_tekanan_darah = $input['vital_tekanan_darah'];
-            $visit->vital_nadi = $input['vital_nadi'];
-            $visit->vital_suhu = $input['vital_suhu'];
-            $visit->vital_respiratory_rate = $input['vital_respiratory_rate'];
-            $visit->vital_spo = $input['vital_spo'];
-            $visit->vital_vas = $input['vital_vas'];
-            $visit->vital_gcs = $input['vital_gcs'];
-            $visit->vital_berat_badan = $input['vital_berat_badan'];
-            $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
-            $visit->status = 2;
-            $visit->save();
+    //     if ($type == 'vital') {
+    //         $visit->vital_tekanan_darah = $input['vital_tekanan_darah'];
+    //         $visit->vital_nadi = $input['vital_nadi'];
+    //         $visit->vital_suhu = $input['vital_suhu'];
+    //         $visit->vital_respiratory_rate = $input['vital_respiratory_rate'];
+    //         $visit->vital_spo = $input['vital_spo'];
+    //         $visit->vital_vas = $input['vital_vas'];
+    //         $visit->vital_gcs = $input['vital_gcs'];
+    //         $visit->vital_berat_badan = $input['vital_berat_badan'];
+    //         $visit->vital_tinggi_badan = $input['vital_tinggi_badan'];
+    //         $visit->status = 2;
+    //         $visit->save();
 
-            session()->flash('status', 'success');
-            session()->flash('message', 'Vital Sign berhasil disimpan.');
-        } else {
-            $visit->keluhan_utama = $input['keluhan_utama'];
-            $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
-            $visit->riwayat_penyakit_sekarang = $input['riwayat_penyakit_sekarang'];
-            $visit->riwayat_penyakit_keluarga = $input['riwayat_penyakit_keluarga'];
-            $visit->sg_kepala_leher = $input['sg_kepala_leher'];
-            $visit->sg_thorax = $input['sg_thorax'];
-            $visit->sg_cob = $input['sg_cob'];
-            $visit->sg_abdomen = $input['sg_abdomen'];
-            $visit->sg_ekstremitas = $input['sg_ekstremitas'];
-            $visit->status_lokalis = $input['status_lokalis'];
-            $visit->diagnosa = $input['diagnosa'];
-            $visit->planning = $input['planning'];
-            $visit->status = 4;
-            $visit->nama_dokter = auth()->user()->name;
-            $visit->save();
+    //         session()->flash('status', 'success');
+    //         session()->flash('message', 'Vital Sign berhasil disimpan.');
+    //     } else {
+    //         $visit->keluhan_utama = $input['keluhan_utama'];
+    //         $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
+    //         $visit->riwayat_penyakit_sekarang = $input['riwayat_penyakit_sekarang'];
+    //         $visit->riwayat_penyakit_keluarga = $input['riwayat_penyakit_keluarga'];
+    //         $visit->sg_kepala_leher = $input['sg_kepala_leher'];
+    //         $visit->sg_thorax = $input['sg_thorax'];
+    //         $visit->sg_cor = $input['sg_cor'];
+    //         $visit->sg_pulmo = $input['sg_pulmo'];
+    //         $visit->sg_abdomen = $input['sg_abdomen'];
+    //         $visit->sg_ekstremitas = $input['sg_ekstremitas'];
+    //         $visit->status_lokalis = $input['status_lokalis'];
+    //         $visit->diagnosa = $input['diagnosa'];
+    //         $visit->planning = $input['planning'];
+    //         $visit->status = 4;
+    //         $visit->nama_dokter = auth()->user()->name;
+    //         $visit->save();
 
-            session()->flash('status', 'success');
-            session()->flash('message', 'Pengecekan pasien sudah selesai, data pasien berhasil disimpan.');
+    //         session()->flash('status', 'success');
+    //         session()->flash('message', 'Pengecekan pasien sudah selesai, data pasien berhasil disimpan.');
 
-            $prescription = [
-                'nama_lengkap' => $visit->pasien->nama_lengkap,
-                'plan' => $visit->planning
-            ];
+    //         $prescription = [
+    //             'nama_lengkap' => $visit->pasien->nama_lengkap,
+    //             'plan' => $visit->planning
+    //         ];
 
-            $visit->notify(new sendPrescriptionNotification($prescription));
+    //         $visit->notify(new sendPrescriptionNotification($prescription));
 
-        }
+    //     }
 
-        return to_route('visit.index');
-    }
+    //     return to_route('visit.index');
+    // }
 
     public function farmasi(Request $request)
     {

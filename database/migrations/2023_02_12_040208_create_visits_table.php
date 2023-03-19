@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('no_antrian');
             $table->string('vital_tekanan_darah')->nullable();
             $table->integer('vital_nadi')->nullable();
-            $table->float('vital_suhu')->nullable();
+            $table->string('vital_suhu')->nullable();
             $table->integer('vital_respiratory_rate')->nullable();
             $table->integer('vital_spo')->nullable();
             $table->integer('vital_vas')->nullable();
