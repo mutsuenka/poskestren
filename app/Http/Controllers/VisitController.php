@@ -28,12 +28,12 @@ class VisitController extends Controller
                                 ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%');
                         });
                 })
-                ->orderBy('status', 'ASC')
+                // ->orderBy('status', 'ASC')
                 ->orderBy('no_antrian', 'ASC')
                 ->paginate();
         } else {
             $visits = Visit::where('tanggal_visit', Carbon::today())
-                ->orderBy('status', 'ASC')
+                // ->orderBy('status', 'ASC')
                 ->orderBy('no_antrian', 'ASC')
                 ->paginate();
         }
