@@ -7,7 +7,7 @@
             </div>
             <input type="text" id="table-search" name="keyword" value="{{  old('keyword', $visits->keyword) }}" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari data visit">
         </div>
-        <a href="{{ route('visit.create') }}" class="block py-2 px-4 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500 shadow-lg">Tambahkan Visit</a>
+        <a href="{{ route('visit.create') }}" class="block py-2 px-4 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500 shadow-lg">+ Antrian</a>
     </form>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">
