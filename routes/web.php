@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/visit/farmasi', [VisitController::class, 'farmasi'])->name('visit.farmasi');
     Route::get('/visit/create', [VisitController::class, 'create'])->name('visit.create');
     Route::post('/visit', [VisitController::class, 'store'])->name('visit.store');
+    Route::get('/visit/log', [VisitController::class, 'indexAll'])->name('visit.log');
     Route::get('/visit/panggil/{visit}', [VisitController::class, 'panggil'])->name('visit.panggil');
     Route::get('/visit/noshow/{visit}', [VisitController::class, 'noshow'])->name('visit.noshow');
     Route::get('/visit/done/{visit}', [VisitController::class, 'serahkanObat'])->name('visit.obat');
