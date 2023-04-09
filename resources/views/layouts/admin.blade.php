@@ -9,16 +9,18 @@
 
         <!-- Fonts -->
 {{--        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">--}}
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
 
-    <link href="https://fonts.bunny.net/css?family=arvo:400|ubuntu:400i" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=arvo:400|ubuntu:400i" rel="stylesheet" />
 
         <!-- Scripts -->
         <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js"></script>
+
         {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+
+        @stack('scripts-lib')
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -213,10 +215,14 @@
 
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.map"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
                 $('.select2').select2({
-                    placeholder: "Pilih...",
+                    placeholder: "Pilih…",
                 });
             });
         </script>
