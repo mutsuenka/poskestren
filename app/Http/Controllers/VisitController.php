@@ -84,6 +84,10 @@ class VisitController extends Controller
     {
         $pasiens = Pasien::whereNull('deleted_at')->get();
 
+        foreach ($pasiens as $pasien) {
+            $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
+        }
+        
         return view('visit.create', compact('pasiens'));
     }
 
@@ -97,7 +101,10 @@ class VisitController extends Controller
         $no_antrian = Visit::where('tanggal_visit', $today)->count();
         // dd($no_antrian);
 
-        $visit_initial->pasien_id = $input['pasien_id'];
+        $data_pasien = json_decode($input['pasien']);
+        // dd($data_pasien);
+
+        $visit_initial->pasien_id = $data_pasien->id;
         $visit_initial->tanggal_visit = $today;
         $visit_initial->no_antrian = $no_antrian + 1;
         $visit_initial->status = MasterStatusVisit::DALAM_ANTRIAN;
