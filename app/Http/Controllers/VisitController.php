@@ -40,6 +40,10 @@ class VisitController extends Controller
 
         $visits->keyword = $keyword;
 
+        $totalPasien = count($visits);
+
+        $totalPasienSelesai = $visits->where('status', 5)->count();
+
         $today = Carbon::today()->translatedFormat('d F Y');
 
 
@@ -52,7 +56,7 @@ class VisitController extends Controller
 
         // dd($visits->count());
 
-        return view('visit.index', compact('visits', 'today'));
+        return view('visit.index', compact('visits', 'today', 'totalPasien', 'totalPasienSelesai'));
     }
 
     public function indexAll(Request $request)
