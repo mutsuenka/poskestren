@@ -50,6 +50,7 @@
                                 </div>
                             </div>
                             <dl>
+
                                 <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Nomor Rekam Medis</dt>
                                 <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="no_rekam_medis"></dd>
                                 <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Kategori</dt>
@@ -117,6 +118,7 @@
 
                 var kelamin = 'laki-laki';
 
+                $('#id').text(currentPasien.id);
                 $('#nama_pasien').text(currentPasien.nama_lengkap);
                 $('#dob_pasien').text(currentPasien.dob);
                 $('#dob_pasien').append(' (' + currentPasien.age + ')');
@@ -134,8 +136,7 @@
 
             $('#editPasienButton').click(function() {
                 var id = currentPasien.id;
-                console.log(id);
-
+                window.location.href = "{{ URL::eto('pasien/:id/edit') }}".replace(':id', id);
             });
 
         });

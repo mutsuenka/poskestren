@@ -87,7 +87,7 @@ class VisitController extends Controller
         foreach ($pasiens as $pasien) {
             $pasien->age = Carbon::parse($pasien->dob)->diff(Carbon::now())->format('%y tahun');
         }
-        
+
         return view('visit.create', compact('pasiens'));
     }
 
@@ -122,16 +122,22 @@ class VisitController extends Controller
 
         $visit->jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
 
-        return view('visit.show', compact('visit'));
+        $riwayat_pasiens = Visit::where('pasien_id', $pasien->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        foreach ($riwayat_pasiens as $riwayat_pasien) {
+            // dd($riwayat_pasien->planning);
+            $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
+        }
+
+        return view('visit.show', compact('visit', 'riwayat_pasiens'));
     }
 
     public function edit(Visit $visit, string $type)
     {
-        if ($type == 'vital') {
-            $view = 'visit.edit-vital';
-        } else {
-            $view = 'visit.edit-visit';
-        }
+
 
         $pasien = Pasien::find($visit->pasien_id);
 
@@ -140,7 +146,29 @@ class VisitController extends Controller
         $visit->jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
 
 
-        return view($view, compact('visit'));
+
+        if ($type == 'vital') {
+            $view = 'visit.edit-vital';
+
+            $riwayat_pasiens = [];
+        } else {
+            $view = 'visit.edit-visit';
+
+            $riwayat_pasiens = Visit::where('pasien_id', $pasien->id)
+                ->latest()
+                ->skip(1)
+                ->take(3)
+                ->get();
+
+            // dd($riwayat_pasiens);
+
+            foreach ($riwayat_pasiens as $riwayat_pasien) {
+                // dd($riwayat_pasien->planning);
+                $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
+            }
+        }
+
+        return view($view, compact('visit', 'riwayat_pasiens'));
     }
 
     public function updatePemeriksaan(Request $request, Visit $visit)

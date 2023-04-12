@@ -4,8 +4,8 @@
     @csrf
     @method('PUT')
 
-    <div class="flex gap-6">
-        <div class="w-1/2 space-y-4">
+    <div class="md:flex gap-6">
+        <div class="md:w-1/2 space-y-4">
 
             <div class="flex align-middle gap-1">
                 <x-input-label for="vital_tekanan_darah" :value="__('Tekanan Darah (mmHg)')" class="w-40 mt-4" />
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="w-1/2 space-y-4">
+        <div class="md:w-1/2 space-y-4 mt-4 md:mt-0">
             <div class="flex align-middle gap-1">
                 <x-input-label for="vital_vas" :value="__('VAS (Skala Nyeri)')" class="w-40 mt-4" />
                 <x-text-input id="vital_vas" name="vital_vas" type="text" class="mt-1 block w-1/3" :value="old('vital_vas', $visit->vital_vas)" autofocus autocomplete="vital_vas" />

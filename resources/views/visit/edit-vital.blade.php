@@ -6,16 +6,12 @@
     </x-slot:header>
 
     <div class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-teal-50 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('visit.info-pasien')
-                </div>
+        <div class="md:flex justify-center gap-3 space-y-3 md:space-y-0">
+            <div class="p-5 bg-teal-200 rounded-md mb-5 md:mb-0">
+                @include('visit.info-pasien')
             </div>
-            <div class="p-4 sm:p-8 bg-teal-50 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('visit.field-vital')
-                </div>
+            <div class="p-5 bg-teal-300 rounded-md">
+                @include('visit.field-vital')
             </div>
         </div>
     </div>

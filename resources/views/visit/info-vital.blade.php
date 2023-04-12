@@ -1,7 +1,7 @@
 <h2 class="font-bold mb-4">Vital Sign Pasien</h2>
 
-<div class="flex mb-4 gap-2">
-    <div class="w-1/2 space-y-4">
+<div class="md:flex mb-4 gap-2">
+    <div class="md:w-1/2 space-y-4">
         <div class="flex align-middle gap-1">
             <x-input-label for="vital_tekanan_darah" :value="__('Tekanan Darah (mmHg)')" class="w-36 mt-4" />
             <x-text-input id="vital_tekanan_darah" name="vital_tekanan_darah" type="text" class="mt-1 block w-1/3" :value="$visit->vital_tekanan_darah" disabled/>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="w-1/2 space-y-4">
+    <div class="md:w-1/2 space-y-4 mt-4 md:mt-0">
 
 
         <div class="flex align-middle gap-1">
