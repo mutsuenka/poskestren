@@ -41,7 +41,7 @@
         <tbody>
             @if ($visits->count() > 0)
                 @foreach ($visits as $visit)
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <tr class="odd:bg-white even:bg-teal-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="w-4 p-4">
                         <div class="flex items-center">
                             <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -64,16 +64,31 @@
                         {{ $visit->nama_status }}
                     </td>
                     <td class="px-6 py-4 flex gap-4">
-                        @if ($visit->status < 3)
+                        @if ($visit->status == 2)
                             <a href="{{ route('visit.panggil', $visit)}}" class="align-middle text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Panggil</a>
                         @endif
-                        @if (auth()->user()->role != 1)
+                        @if (auth()->user()->role != 1 && $visit->status != 6)
                             @if ($visit->status >= 1)
-                                <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
+                            <a href="{{ route('visit.edit', [$visit->id, 'vital'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">Catat Vital</a>
                             @endif
                             @if ($visit->status >= 2)
-                                <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
+                            <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">Periksa Pasien</a>
                             @endif
+                        @endif
+                        @if ($visit->status == 1)
+                            <a href="{{ route('visit.cancel', $visit)}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+                                    <path fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zm6.133 2.845a.75.75 0 011.06 0l1.72 1.72 1.72-1.72a.75.75 0 111.06 1.06l-1.72 1.72 1.72 1.72a.75.75 0 11-1.06 1.06L12 15.685l-1.72 1.72a.75.75 0 11-1.06-1.06l1.72-1.72-1.72-1.72a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        @endif
+                        @if ($visit->status == 6)
+                            <a href="{{ route('visit.reset', $visit)}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-green-400 p-2 rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
+                                  </svg>
+                            </a>
                         @endif
                     </td>
                 </tr>

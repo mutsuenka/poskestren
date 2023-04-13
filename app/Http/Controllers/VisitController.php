@@ -40,6 +40,10 @@ class VisitController extends Controller
 
         $visits->keyword = $keyword;
 
+        $totalPasien = count($visits);
+
+        $totalPasienSelesai = $visits->where('status', 5)->count();
+
         $today = Carbon::today()->translatedFormat('d F Y');
 
 
@@ -52,7 +56,7 @@ class VisitController extends Controller
 
         // dd($visits->count());
 
-        return view('visit.index', compact('visits', 'today'));
+        return view('visit.index', compact('visits', 'today', 'totalPasien', 'totalPasienSelesai'));
     }
 
     public function indexAll(Request $request)
@@ -341,12 +345,20 @@ class VisitController extends Controller
         return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dalam proses pemeriksaan dokter');
     }
 
-    public function noShow(Visit $visit)
+    public function cancel(Visit $visit)
     {
         $visit->status = 6;
         $visit->save();
 
-        return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' dinyatakan no show');
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' telah dibatalkan');
+    }
+
+    public function kembalikanAntrian(Visit $visit)
+    {
+        $visit->status = 1;
+        $visit->save();
+
+        return to_route('visit.index')->with('status', 'success')->with('message', 'Nomor Antrian ' . $visit->no_antrian . ' atas nama ' . $visit->pasien->nama_lengkap . ' telah kembali ke atrian.');
     }
 
     public function serahkanObat(Visit $visit)

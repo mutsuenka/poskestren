@@ -54,12 +54,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/visit', [VisitController::class, 'store'])->name('visit.store');
     Route::get('/visit/log', [VisitController::class, 'indexAll'])->name('visit.log');
     Route::get('/visit/panggil/{visit}', [VisitController::class, 'panggil'])->name('visit.panggil');
-    Route::get('/visit/noshow/{visit}', [VisitController::class, 'noshow'])->name('visit.noshow');
+    Route::get('/visit/cancel/{visit}', [VisitController::class, 'cancel'])->name('visit.cancel');
     Route::get('/visit/done/{visit}', [VisitController::class, 'serahkanObat'])->name('visit.obat');
     Route::put('/visit/edit/{visit}/vital', [VisitController::class, 'updateVitalSign'])->name('visit.update-vital');
     Route::put('/visit/edit/{visit}/pemeriksaan', [VisitController::class, 'updatePemeriksaan'])->name('visit.update-pemeriksaan');
     Route::get('/visit/edit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::get('/visit/show/{visit}', [VisitController::class, 'show'])->name('visit.show');
+    Route::get('/visit/reset/{visit}', [VisitController::class, 'kembalikanAntrian'])->name('visit.reset');
 
 });
 
