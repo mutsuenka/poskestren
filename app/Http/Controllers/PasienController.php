@@ -30,12 +30,6 @@ class PasienController extends Controller
             $pasiens = Pasien::paginate(10);
         }
 
-        // $pasiens = Pasien::where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
-        //     ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%')
-        //     ->orWhere('kategori', 'LIKE', '%'.$keyword.'%')
-        //     ->orWhere('nik', 'LIKE', '%'.$keyword.'%')
-        //     ->paginate(10);
-        // // $pasiens = Pasien::all();
         $pasiens->keyword = $keyword;
 
         foreach ($pasiens as $pasien) {
@@ -46,7 +40,17 @@ class PasienController extends Controller
 
         }
 
-        return view('pasien.index', compact('pasiens'));
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+
+        $totalPasien = Pasien::whereNull('deleted_at')->get()->count();
+        $totalPasienTahun = Pasien::whereYear('created_at', $year)->get()->count();
+        $totalPasienBulan = Pasien::whereMonth('created_at', $month)->get()->count();
+
+        setlocale(LC_TIME, 'id_ID');
+        $monthYear = Carbon::now()->formatLocalized('%B %Y');
+
+        return view('pasien.index', compact('pasiens', 'year', 'monthYear', 'totalPasien', 'totalPasienTahun', 'totalPasienBulan'));
     }
 
     /**

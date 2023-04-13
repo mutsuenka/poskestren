@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MasterStatusVisit;
-use App\Models\Pasien;
-use App\Models\Visit;
-use App\Notifications\sendPrescriptionNotification;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Visit;
+use App\Models\Pasien;
 use Illuminate\Http\Request;
+use App\Models\MasterStatusVisit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+use App\Notifications\sendPrescriptionNotification;
 // use Illuminate\Support\Carbon;
 
 class VisitController extends Controller
@@ -80,7 +81,24 @@ class VisitController extends Controller
                 ->paginate();
         }
 
-        return view('visit.log', compact('visits', 'keyword'));
+        $year = $request->year ? (int)$request->year : Carbon::now()->year;
+        $month = $request->month ? (int)$request->month : Carbon::now()->month;
+
+        $totalPerTahun = Visit::whereYear('tanggal_visit', $year)
+            ->where('status', '<>', '6')
+            ->count();
+
+        $totalPerBulan = Visit::whereMonth('tanggal_visit', $month)
+            ->where('status', '<>', '6')
+            ->count();
+
+        $month = Carbon::now()->format('F');
+
+        $months = $this->getMonth();
+
+        $years = $this->getYears();
+
+        return view('visit.log', compact('visits', 'keyword', 'totalPerTahun', 'totalPerBulan', 'year', 'month', 'months', 'years'));
 
     }
 
@@ -367,5 +385,32 @@ class VisitController extends Controller
         $visit->save();
 
         return to_route('visit.farmasi')->with('status', 'success')->with('message', 'Obat pasien ' . $visit->pasien->nama_lengkap . ' telah diserahkan.');
+    }
+
+    public static function getYears()
+    {
+        $years = DB::select("SELECT DISTINCT YEAR(tanggal_visit) AS year FROM visits");
+
+        return $years;
+    }
+
+    public static function getMonth()
+    {
+
+        $months = DB::table('visits')
+            ->select(DB::raw('DISTINCT MONTH(tanggal_visit) as month'))
+            ->orderBy('month')
+            ->get()
+            ->pluck('month');
+
+        $monthNames = $months->map(function ($month) {
+            return Carbon::createFromDate(null, $month, null)
+                ->locale('id_ID')
+                ->monthName;
+        });
+
+        $monthsData = $months->combine($monthNames->toArray());
+
+        return $monthsData;
     }
 }
