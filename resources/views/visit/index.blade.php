@@ -22,6 +22,14 @@
                 {{ $totalPasienSelesai . ' Pasien'}}
             </div>
         </div>
+        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/6 shadow-md">
+            <div class="font-semibold text-lg text-left">
+                Sisa Antrian
+            </div>
+            <div class="font-bold text-2xl text-right">
+                {{ $totalPasien - $totalPasienSelesai . ' Pasien'}}
+            </div>
+        </div>
     </div>
 
     @include('visit.antrian')

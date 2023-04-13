@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/visit/edit/{visit}/{type}', [VisitController::class, 'edit'])->name('visit.edit');
     Route::get('/visit/show/{visit}', [VisitController::class, 'show'])->name('visit.show');
     Route::get('/visit/reset/{visit}', [VisitController::class, 'kembalikanAntrian'])->name('visit.reset');
+    Route::get('/visit/export', [VisitController::class, 'exportVisit'])->name('visit.export');
 
 });
 

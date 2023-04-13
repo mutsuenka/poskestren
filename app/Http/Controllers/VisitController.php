@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VisitExport;
 use Carbon\Carbon;
 use App\Models\Visit;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\Models\MasterStatusVisit;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Collection;
 use App\Notifications\sendPrescriptionNotification;
 // use Illuminate\Support\Carbon;
@@ -67,8 +69,10 @@ class VisitController extends Controller
         if ($keyword) {
             $visits = Visit::with('pasien')
                 ->where(function($query) use ($keyword) {
-                    $query->where('no_antrian', 'LIKE', '%'.$keyword.'%')
-                        ->orWhere('status', 'LIKE', '%'.$keyword.'%')
+                    $query->where('tanggal_visit', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('keluhan_utama', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('diagnosa', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('planning', 'LIKE', '%'.$keyword.'%')
                         ->orWhereHas('pasien', function($query) use ($keyword){
                             $query->where('nama_lengkap', 'LIKE', '%'.$keyword.'%')
                                 ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%');
@@ -412,5 +416,18 @@ class VisitController extends Controller
         $monthsData = $months->combine($monthNames->toArray());
 
         return $monthsData;
+    }
+
+    public function exportVisit(Request $request)
+    {
+        // dd(Carbon::parse($request->start_date), $request->end_date);
+
+        $visits = Visit::whereBetween('tanggal_visit',[$request->start_date, $request->end_date])->get();
+
+        $visits = new VisitExport($visits);
+
+        $filename = 'DataVisit–'.Carbon::now()->format('YmdHi').'.xlsx';
+
+        return Excel::download($visits, $filename);
     }
 }
