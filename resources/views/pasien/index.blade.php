@@ -7,7 +7,7 @@
 
     <!-- simple dashboard -->
     <div class="flex p-2 gap-4 justify-start">
-        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/6 shadow-md">
+        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/3 xl:w-1/6 shadow-md">
             <div class="font-semibold text-md text-left mb-5">
                 Total Pasien
             </div>
@@ -15,7 +15,7 @@
                 {{ $totalPasien }}
             </div>
         </div>
-        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/6 shadow-md">
+        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/3 xl:w-1/6 shadow-md">
             <div class="font-semibold text-md text-left mb-5">
                 Pasien Baru {{ $monthYear }}
             </div>
@@ -23,7 +23,7 @@
                 {{ $totalPasienBulan }}
             </div>
         </div>
-        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/6 shadow-md">
+        <div class="bg-teal-100 p-7 h-1/4 space-y-3 rounded-md w-1/3 xl:w-1/6 shadow-md">
             <div class="font-semibold text-md text-left mb-5">
                 Pasien Baru {{ $year }}
             </div>
@@ -44,18 +44,25 @@
                 <input type="text" id="table-search" name="keyword" value="{{  old('keyword',$pasiens->keyword) }}" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Pasien/RM">
             </div>
             <div class="flex gap-2">
-                <a href="{{ route('pasien.export') }}" class="block p-2 bg-teal-400 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">Export Data Pasien</a>
-                <a href="{{ route('pasien.create') }}" class="block p-2 bg-teal-500 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">Tambahkan Pasien</a>
+                <a href="{{ route('pasien.export') }}" class="flex py-2 px-3 bg-teal-400 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="mr-1 -ml-1 w-5 h-5">
+                        <path fill-rule="evenodd" d="M11.47 2.47a.75.75 0 011.06 0l4.5 4.5a.75.75 0 01-1.06 1.06l-3.22-3.22V16.5a.75.75 0 01-1.5 0V4.81L8.03 8.03a.75.75 0 01-1.06-1.06l4.5-4.5zM3 15.75a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                    Export
+                </a>
+                <a href="{{ route('pasien.create') }}" class="flex py-2 px-3 bg-teal-500 text-white rounded-lg relative mt-1 hover:bg-teal-600 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                    </svg>
+                    Pasien
+                </a>
             </div>
         </form>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">
                 <tr>
-                    <th scope="col" class="p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                        </div>
+                    <th scope="col" class="px-6 py-3">
+                        #
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Nama Pasien
@@ -81,17 +88,17 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $i = ($pasiens->currentPage() -1) * $pasiens->perPage() + 1;
+                @endphp
                 @foreach ($pasiens as $pasien)
                 <tr class="odd:bg-white even:bg-teal-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                        </div>
-                    </td>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $pasien->nama_lengkap }}
+                    <th scope="row" class="px-6 py-4">
+                        {{ $i++ }}
                     </th>
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $pasien->nama_lengkap }}
+                    </td>
                     <td class="px-6 py-4">
                         {{ $pasien->no_rekam_medis }}
                     </td>

@@ -1,7 +1,7 @@
 <x-admin-layout>
     <x-slot:header>
         <h2 class="font-semibold text-xl-text-gray-800">
-            {{ __('Tambah Data Visit')}}
+            {{ __('Tambah Antrian Pasien')}}
         </h2>
     </x-slot:header>
 

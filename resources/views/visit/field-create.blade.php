@@ -1,8 +1,8 @@
 <div class="flex justify-center align-middle gap-4 justify-items-center">
-    <div class="flex w-[40%] bg-gray-100 rounded-md p-4 place-content-center">
+    <div class="w-[50%] bg-gray-100 rounded-md p-4 place-content-center">
         <form method="post" action="{{ route('visit.store') }}" class="space-y-4">
             @csrf
-            <p class="text-md text-center m-5">Pasien sudah ada? Pilih Pasien:</p>
+            <h1 class="font-bold text-md text-center m-5">Pasien sudah ada? Pilih Pasien:</h1>
             <div class="text-center m-5 w-[25em]">
                 <select name="pasien" id="pasien"  class="w-full select2 left-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block">
                     <option value=""></option>
@@ -91,9 +91,9 @@
             </div>
         </form>
     </div>
-    <div class="flex w-[45%] bg-gray-100 rounded-md place-content-center place-items-center p-4">
+    <div class="flex w-[50%] bg-gray-100 rounded-md place-content-center place-items-center p-4">
         <div class="space-y-8">
-            <p class="text-center text-md mb-4">Pasien belum ada?</p>
+            <h1 class="font-bold text-center text-md mb-4">Pasien belum ada?</h1>
             <div class="mt-4 place-self-center" >
                 <a href="{{ route('pasien.create') }}" class="bg-teal-700 text-md hover:bg-teal-600 text-white p-4 rounded-lg">Tambah Data Pasien Baru</a>
             </div>

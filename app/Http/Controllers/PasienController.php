@@ -25,9 +25,9 @@ class PasienController extends Controller
         $keyword = $request->keyword;
 
         if ($keyword) {
-            $pasiens = Pasien::search($keyword)->paginate(10);
+            $pasiens = Pasien::search($keyword)->paginate(7);
         } else {
-            $pasiens = Pasien::paginate(10);
+            $pasiens = Pasien::paginate(7);
         }
 
         $pasiens->keyword = $keyword;

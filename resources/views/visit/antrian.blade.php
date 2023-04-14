@@ -7,20 +7,16 @@
             </div>
             <input type="text" id="table-search" name="keyword" value="{{  old('keyword', $visits->keyword) }}" class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari data visit">
         </div>
-        <a href="{{ route('visit.create') }}" class="block py-2 px-4 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500 shadow-lg">+ Antrian</a>
+        <a href="{{ route('visit.create') }}" class="flex py-2 px-4 bg-teal-600 text-white rounded-lg relative mt-1 hover:bg-teal-800 hover:border-blue-500 shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+            </svg>
+            Antrian
+        </a>
     </form>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">
             <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Tanggal Visit
-                </th>
                 <th scope="col" class="px-6 py-3 text-center">
                     Antrian ke-
                 </th>
@@ -29,6 +25,12 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Nama Pasien
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Umur Pasien
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Jenis Kelamin
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
@@ -42,15 +44,6 @@
             @if ($visits->count() > 0)
                 @foreach ($visits as $visit)
                 <tr class="odd:bg-white even:bg-teal-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                        </div>
-                    </td>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $visit->tanggal_visit }}
-                    </th>
                     <td class="px-6 py-4 text-center">
                         {{ $visit->no_antrian }}
                     </td>
@@ -59,6 +52,12 @@
                     </td>
                     <td class="px-6 py-4">
                         {{ $visit->pasien->nama_lengkap }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $visit->age }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $visit->pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan'  }}
                     </td>
                     <td class="px-6 py-4">
                         {{ $visit->nama_status }}

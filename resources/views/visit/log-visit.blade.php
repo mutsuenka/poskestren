@@ -60,14 +60,8 @@
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-teal-100 dark:bg-gray-700 dark:text-gray-400 rounded">
             <tr>
-                {{-- <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                    </div>
-                </th> --}}
                 <th scope="col" class="px-6 py-3">
-                    ID Visit
+                    #
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Tanggal Visit
@@ -84,9 +78,9 @@
                 <th scope="col" class="px-6 py-3">
                     Diagnosa
                 </th>
-                <th scope="col" class="px-6 py-3">
+                {{-- <th scope="col" class="px-6 py-3">
                     Planning
-                </th>
+                </th> --}}
                 <th scope="col" class="px-6 py-3">
                     Action
                 </th>
@@ -94,20 +88,17 @@
         </thead>
         <tbody>
             @if ($visits->count() > 0)
+                @php
+                    $i = ($visits->currentPage() -1) * $visits->perPage() + 1;
+                @endphp
                 @foreach ($visits as $visit)
                 <tr class="odd:bg-white even:bg-teal-50 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 align-middle">
-                    {{-- <td class="w-4 p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                        </div>
-                    </td> --}}
-                    <td class="px-6 py-4 text-center">
-                        {{ $visit->id }}
-                    </td>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $visit->tanggal_visit }}
+                    <th scope="row" class="px-6 py-4">
+                        {{ $i++ }}
                     </th>
+                    <td class="px-6 py-4">
+                        {{ $visit->tanggal_visit }}
+                    </td>
                     <td class="px-6 py-4">
                         {{ $visit->pasien->no_rekam_medis }}
                     </td>
@@ -120,9 +111,9 @@
                     <td class="px-6 py-4">
                         {{ $visit->diagnosa }}
                     </td>
-                    <td class="px-6 py-4">
+                    {{-- <td class="px-6 py-4">
                         {!! nl2br(e($visit->planning)) !!}
-                    </td>
+                    </td> --}}
                     <td class="px-6 py-4 flex gap-4 items-center justify-center">
                         @if (auth()->user()->role > 2)
                             <a href="{{ route('visit.edit', [$visit->id, 'visit'])}}" class="text-center font-medium text-white dark:text-blue-500 hover:underline bg-teal-400 p-2 rounded">

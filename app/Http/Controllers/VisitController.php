@@ -49,11 +49,12 @@ class VisitController extends Controller
 
         $today = Carbon::today()->translatedFormat('d F Y');
 
-
         foreach ($visits as $visit) {
             $status = MasterStatusVisit::where('id', $visit->status)->get();
+            $age = Carbon::parse($visit->pasien->dob)->diff(Carbon::now())->format('%y tahun');
 
             $visit['nama_status'] = $status[0]->nama_status;
+            $visit['age'] = $age;
 
         }
 
@@ -79,10 +80,10 @@ class VisitController extends Controller
                         });
                 })
                 ->orderBy('id', 'DESC')
-                ->paginate();
+                ->paginate(8);
         } else {
             $visits = Visit::orderBy('id', 'DESC')
-                ->paginate();
+                ->paginate(5);
         }
 
         $year = $request->year ? (int)$request->year : Carbon::now()->year;

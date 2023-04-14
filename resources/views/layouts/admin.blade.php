@@ -85,7 +85,7 @@
         </nav>
 
         <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform
-        -translate-x-full bg-teal-500 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        -translate-x-full bg-teal-500 border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
                aria-label="Sidebar">
             <div class="h-full px-3 pb-4 overflow-y-auto bg-teal-500 dark:bg-gray-800">
                 <ul class="space-y-2">
@@ -200,7 +200,7 @@
             </div>
         </aside>
 
-        <div class="p-4 sm:ml-64" style="background-image: url(logo_postren.jpg)">
+        <div class="p-4 md:ml-64" style="background-image: url(logo_postren.jpg)">
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow mt-16">
