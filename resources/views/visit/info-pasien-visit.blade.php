@@ -55,7 +55,7 @@
         @endif
     </div>
     <div id="readRiwayatPasienModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-xl h-full md:h-auto">
+        <div class="relative p-4 w-full max-w-6xl h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                 <!-- Modal header -->
@@ -71,14 +71,63 @@
                         </button>
                     </div>
                 </div>
-                <dl>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Keluhan Utama</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="keluhan_utama"></dd>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Diagnosis</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="diagnosis"></dd>
-                    <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Planning</dt>
-                    <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="planning"></dd>
-                </dl>
+                <div class="px-5">
+                    <h2 class="font-bold mx-4">Vital</h2>
+                    <table class="w-full rounded-md border-collapse border mb-4">
+                        <thead class="">
+                            <tr class="bg-teal-100">
+                                <th scope="col" class="px-6 py-3">ABP<br/>(mmHg)</th>
+                                <th scope="col" class="px-6 py-3">Nadi<br/>(x/menit)</th>
+                                <th scope="col" class="px-6 py-3">Suhu<br/>(°C)</th>
+                                <th scope="col" class="px-6 py-3">RR<br/>(x/menit)</th>
+                                <th scope="col" class="px-6 py-3">SPO2<br/>(%)</th>
+                                <th scope="col" class="px-6 py-3">VAS</th>
+                                <th scope="col" class="px-6 py-3">GCS</th>
+                                <th scope="col" class="px-6 py-3">BB<br/>(kg)</th>
+                                <th scope="col" class="px-6 py-3">TB<br/>(cm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td id="tekanan_darah" class="bg-teal-50 px-6 py-3"></td>
+                                <td id="nadi" class="px-6 py-3"></td>
+                                <td id="suhu" class="bg-teal-50 px-6 py-3"></td>
+                                <td id="respiratory_rate" class="px-6 py-3"></td>
+                                <td id="spo" class="bg-teal-50 px-6 py-3"></td>
+                                <td id="vas"  class="px-6 py-3"></td>
+                                <td id="gcs" class="bg-teal-50 px-6 py-3"></td>
+                                <td id="berat_badan" class="px-6 py-3"></td>
+                                <td id="tinggi_badan" class="bg-teal-50 px-6 py-3" ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex gap-4 p-5">
+                    <dl class="p-5 w-1/2">
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Keluhan Utama</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="keluhan_utama"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Riwayat Penyakit Sekarang</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="riwayat_penyakit_sekarang"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Diagnosis</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="diagnosis"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Planning</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="planning"></dd>
+                    </dl>
+                    <dl class="p-5 w-1/2">
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Kepala/Leher</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="kepala_leher"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Thorax</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="thorax"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">COR</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="cor"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Pulmo</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="pulmo"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Abdomen</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="abdomen"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Ekstremitas</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="ekstremitas"></dd>
+                    </dl>
+                </div>
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-3 sm:space-x-4">
                         <button type="button" id="viewVisit" class="text-white inline-flex items-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
@@ -88,13 +137,12 @@
                             </svg>
                             Lihat selengkapnya
                         </button>
-                        <button type="button" class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                            Preview
-                        </button>
                     </div>
-                    <button type="button" class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                        Delete
+                    <button type="button" data-modal-toggle="readRiwayatPasienModal" class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" fill="currentColor" class="mr-1 -ml-1 w-5 h-5">
+                            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+                        </svg>
+                        Close
                     </button>
                 </div>
             </div>
@@ -130,6 +178,22 @@
                 $('#keluhan_utama').text(data.keluhan_utama);
                 $('#diagnosis').text(data.diagnosa);
                 $('#planning').html(data.planning);
+                $('#tekanan_darah').text(data.vital_tekanan_darah);
+                $('#nadi').text(data.vital_nadi);
+                $('#suhu').text(data.vital_suhu);
+                $('#respiratory_rate').text(data.vital_respiratory_rate);
+                $('#spo').text(data.vital_spo);
+                $('#vas').text(data.vital_vas);
+                $('#gcs').text(data.vital_gcs);
+                $('#berat_badan').text(data.vital_berat_badan);
+                $('#tinggi_badan').text(data.vital_tinggi_badan);
+                $('#riwayat_penyakit_sekarang').text(data.riwayat_penyakit_sekarang);
+                $('#kepala_leher').text(data.sg_kepala_leher);
+                $('#thorax').text(data.sg_thorax);
+                $('#cor').text(data.sg_cor);
+                $('#pulmo').text(data.sg_pulmo);
+                $('#abdomen').text(data.sg_abdomen);
+                $('#ekstremitas').text(data.sg_ekstremitas);
             }
 
             $('#viewVisit').on('click', function () {
