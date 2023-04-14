@@ -1,33 +1,29 @@
 <h2 class="font-bold mb-4">Informasi Pasien</h2>
 
-<div class="mt-4 space-y-6">
-    <div class="flex align-middle">
-        <x-input-label for="pasien_id" :value="__('Pasien')" class="w-48 mt-4" />
-        <x-text-input id="pasien_id" name="pasien_id" type="" class="mt-1 block w-full" :value="$visit->pasien->nama_lengkap" disabled/>
-    </div>
+<div class="mt-4">
+    {{-- <div class="ring border-blue-500 rounded-sm p-5 mb-4"> --}}
+        <div class="flex">
+            <dl class="px-5 w-1/2">
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Pasien</dt>
+                <dd class="mb-4 font-light sm:mb-5 dark:text-black">{{ $visit->pasien->nama_lengkap }}</dd>
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Tanggal Visit</dt>
+                <dd class="mb-4 font-light sm:mb-5 dark:text-black">{{ $visit->tanggal_visit }}</dd>
+            </dl>
+            <dl class="px-5 w-1/2">
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Jenis Kelamin</dt>
+                <dd class="mb-4 font-light sm:mb-5 dark:text-black">{{ $visit->jenis_kelamin }}</dd>
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Umur</dt>
+                <dd class="mb-4 font-light sm:mb-5 dark:text-black">{{ $visit->pasien_age }}</dd>
+            </dl>
+        </div>
+        <dl class="px-5">
+            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Alergi</dt>
+            <dd class="font-light sm:mb-5 dark:text-black">{{ $visit->pasien->alergi }}</dd>
+        </dl>
+    {{-- </div> --}}
 
-    <div class="flex align-middle">
-        <x-input-label for="tanggal_visit" :value="__('Tanggal Visit')" class="w-48 mt-4" />
-        <x-text-input id="tanggal_visit" name="tanggal_visit" type="" class="mt-1 block w-full" :value="$visit->tanggal_visit" disabled/>
-    </div>
-
-    <div class="flex align-middle">
-        <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" class="w-48 mt-4" />
-        <x-text-input id="jenis_kelamin" name="jenis_kelamin" type="" class="mt-1 block w-full" :value="$visit->jenis_kelamin" disabled/>
-    </div>
-
-    <div class="flex align-middle">
-        <x-input-label for="pasien_age" :value="__('Umur')" class="w-48 mt-4" />
-        <x-text-input id="pasien_age" name="pasien_age" type="" class="mt-1 block w-full" :value="$visit->pasien_age" disabled/>
-    </div>
-
-    <div class="flex align-middle">
-        <x-input-label for="alergi" :value="__('alergi')" class="w-48 mt-4" />
-        <x-text-area id="alergi" name="alergi" type="" class="mt-1 block w-full" :value="$visit->pasien->alergi" disabled></x-text-area>
-    </div>
-
-    <h3 class="font-bold">Riwayat Visit Pasien</h3>
-    <div class="flex align-middle justify-center border border-blue-500 round-sm">
+    <h2 class="font-bold mb-4">Riwayat Visit Pasien</h2>
+    <div class="flex align-middle justify-center ring border-blue-500 rounded-sm">
         @if ($riwayat_pasiens->isNotEmpty())
             @if (isset($riwayat_pasiens[0]))
                 <div class="flex justify-center m-5">
@@ -103,17 +99,22 @@
                     </table>
                 </div>
                 <div class="flex gap-4 p-5">
-                    <dl class="p-5 w-1/2">
+                    <dl class="p-5 w-[30%]">
                         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Keluhan Utama</dt>
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="keluhan_utama"></dd>
                         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Riwayat Penyakit Sekarang</dt>
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="riwayat_penyakit_sekarang"></dd>
-                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Diagnosis</dt>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="diagnosis"></dd>
-                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Planning</dt>
-                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="planning"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Riwayat Penyakit Dulu</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="riwayat_penyakit_dulu"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Riwayat Penyakit Keluarga</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="riwayat_penyakit_keluarga"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Status Lokalis</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="status_lokalis"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Hasil Lab</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="hasil_lab"></dd>
+
                     </dl>
-                    <dl class="p-5 w-1/2">
+                    <dl class="p-5 w-[30%]">
                         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Kepala/Leher</dt>
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="kepala_leher"></dd>
                         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Thorax</dt>
@@ -126,6 +127,12 @@
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="abdomen"></dd>
                         <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Ekstremitas</dt>
                         <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="ekstremitas"></dd>
+                    </dl>
+                    <dl class="p-5 w-[40%]">
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Diagnosis</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="diagnosis"></dd>
+                        <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Planning</dt>
+                        <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400" id="planning"></dd>
                     </dl>
                 </div>
                 <div class="flex justify-between items-center">
@@ -187,13 +194,17 @@
                 $('#gcs').text(data.vital_gcs);
                 $('#berat_badan').text(data.vital_berat_badan);
                 $('#tinggi_badan').text(data.vital_tinggi_badan);
-                $('#riwayat_penyakit_sekarang').text(data.riwayat_penyakit_sekarang);
                 $('#kepala_leher').text(data.sg_kepala_leher);
                 $('#thorax').text(data.sg_thorax);
                 $('#cor').text(data.sg_cor);
                 $('#pulmo').text(data.sg_pulmo);
                 $('#abdomen').text(data.sg_abdomen);
                 $('#ekstremitas').text(data.sg_ekstremitas);
+                $('#riwayat_penyakit_dulu').text(data.riwayat_penyakit_dulu || '-');
+                $('#riwayat_penyakit_keluarga').text(data.riwayat_penyakit_keluarga || '-');
+                $('#riwayat_penyakit_sekarang').text(data.riwayat_penyakit_sekarang || '-');
+                $('#status_lokalis').text(data.status_lokalis || '-');
+                $('#hasil_lab').text(data.hasil_lab || '-');
             }
 
             $('#viewVisit').on('click', function () {

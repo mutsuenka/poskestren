@@ -1,53 +1,45 @@
 <h2 class="font-bold mb-4">Vital Sign Pasien</h2>
 
-<div class="md:flex mb-4 gap-2">
-    <div class="md:w-1/2 space-y-4">
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_tekanan_darah" :value="__('Tekanan Darah (mmHg)')" class="w-36 mt-4" />
-            <x-text-input id="vital_tekanan_darah" name="vital_tekanan_darah" type="text" class="mt-1 block w-1/3" :value="$visit->vital_tekanan_darah" disabled/>
-        </div>
+<table class="w-full rounded-md border-collapse border mb-4">
+    <thead class="">
+        <tr class="bg-teal-100">
+            <th scope="col" class="px-6 py-3">ABP<br/>(mmHg)</th>
+            <th scope="col" class="px-6 py-3">Nadi<br/>(x/menit)</th>
+            <th scope="col" class="px-6 py-3">Suhu<br/>(°C)</th>
+            <th scope="col" class="px-6 py-3">RR<br/>(x/menit)</th>
 
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_nadi" :value="__('Nadi (x/menit)')" class="w-36 mt-4" />
-            <x-text-input id="vital_nadi" name="vital_nadi" type="text" class="mt-1 block w-1/3" :value="$visit->vital_nadi" disabled/>
-        </div>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <td id="tekanan_darah" class="bg-teal-50 px-6 py-3">{{ $visit->vital_tekanan_darah }}</td>
+            <td id="nadi" class="px-6 py-3">{{ $visit->vital_nadi }}</td>
+            <td id="suhu" class="bg-teal-50 px-6 py-3">{{ $visit->vital_suhu }}</td>
+            <td id="respiratory_rate" class="px-6 py-3">{{ $visit->vital_respiratory_rate }}</td>
 
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_suhu" :value="__('Suhu Badan (°C)')" class="w-36 mt-4" />
-            <x-text-input id="vital_suhu" name="vital_suhu" type="text" class="mt-1 block w-1/3" :value="$visit->vital_suhu" disabled/>
-        </div>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_respiratory_rate" :value="__('Respiratory Rate (x/menit)')" class="w-36 mt-4" />
-            <x-text-input id="vital_respiratory_rate" name="vital_respiratory_rate" type="text" class="mt-1 block w-1/3" :value="$visit->vital_respiratory_rate" disabled />
-        </div>
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_spo" :value="__('SpO2 (%)')" class="w-36 mt-4" />
-            <x-text-input id="vital_spo" name="vital_spo" type="text" class="mt-1 block w-1/3" :value="$visit->vital_spo" disabled/>
-        </div>
-    </div>
+<table class="w-full rounded-md border-collapse border mb-4">
+    <thead class="">
+        <tr class="bg-teal-100">
 
-    <div class="md:w-1/2 space-y-4 mt-4 md:mt-0">
+            <th scope="col" class="px-6 py-3">SPO2<br/>(%)</th>
+            <th scope="col" class="px-6 py-3">VAS</th>
+            <th scope="col" class="px-6 py-3">GCS</th>
+            <th scope="col" class="px-6 py-3">BB<br/>(kg)</th>
+            <th scope="col" class="px-6 py-3">TB<br/>(cm)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
 
-
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_vas" :value="__('VAS (Skala Nyeri)')" class="w-36 mt-4" />
-            <x-text-input id="vital_vas" name="vital_vas" type="text" class="mt-1 block w-1/3" :value="$visit->vital_vas" disabled/>
-        </div>
-
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_gcs" :value="__('GCS (Glasgow Coma Scale)')" class="w-36 mt-4" />
-            <x-text-input id="vital_gcs" name="vital_gcs" type="text" class="mt-1 block w-1/3" :value="$visit->vital_gcs" disabled/>
-        </div>
-
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_berat_badan" :value="__('Berat Badan (kg)')" class="w-36 mt-4" />
-            <x-text-input id="vital_berat_badan" name="vital_berat_badan" type="text" class="mt-1 block w-1/3" :value="$visit->vital_berat_badan" disabled/>
-        </div>
-
-        <div class="flex align-middle gap-1">
-            <x-input-label for="vital_tinggi_badan" :value="__('Tinggi Badan (cm)')" class="w-36 mt-4" />
-            <x-text-input id="vital_tinggi_badan" name="vital_tinggi_badan" type="text" class="mt-1 block w-1/3" :value="$visit->vital_tinggi_badan" disabled/>
-        </div>
-    </div>
-</div>
+            <td id="spo" class="bg-teal-50 px-6 py-3">{{ $visit->vital_spo }}</td>
+            <td id="vas"  class="px-6 py-3">{{ $visit->vital_vas }}</td>
+            <td id="gcs" class="bg-teal-50 px-6 py-3">{{ $visit->vital_gcs }}</td>
+            <td id="berat_badan" class="px-6 py-3">{{ $visit->vital_berat_badan }}</td>
+            <td id="tinggi_badan" class="bg-teal-50 px-6 py-3" >{{ $visit->vital_tinggi_badan }}</td>
+        </tr>
+    </tbody>
+</table>

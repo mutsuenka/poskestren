@@ -3,16 +3,18 @@
     @csrf
     @method('PUT')
 
-    <div class="justify-center gap-3 space-y-3 w-[40%]">
-        <div class="p-5 bg-teal-200 rounded-md mb-0 shadow-lg">
+    <!--Info Pasien dan vital-->
+    <div class="space-y-2 w-[40%] h-[80vh]">
+        <div class="p-5 bg-teal-200 rounded-md mb-0 shadow-lg h-[55%]">
             @include('visit.info-pasien-visit')
         </div>
-        <div class="p-5 bg-teal-300 rounded-md shadow-lg">
+        <div class="p-5 bg-teal-300 rounded-md shadow-lg h-[44%]">
             @include('visit.info-vital')
         </div>
     </div>
 
-    <div id="anamnesis" class="overflow-auto p-5 rounded-md bg-teal-200 space-y-6 max-h-[80vh] w-[30%] shadow-lg">
+    <!--anamnesis-->
+    <div id="anamnesis" class="overflow-auto p-5 rounded-md bg-teal-200 space-y-6 max-h-[80vh] shadow-lg w-[30%]">
         <h3 class="font-bold mb-4">Anamnesis</h3>
         <div class="flex align-middle">
             <x-input-label for="keluhan_utama" :value="__('Keluhan Utama')" class="w-48 mt-4" />
@@ -89,7 +91,8 @@
         </div>
     </div>
 
-    <div id="conclusion" class="p-5 rounded-md bg-teal-300 space-y-6 w-[30%] shadow-lg">
+    <!--conclusion-->
+    <div id="conclusion" class="p-5 rounded-md bg-teal-300 space-y-6 shadow-lg w-[30%] max-h-[80vh]">
         <h3 class="font-bold mb-4">Diagnosis dan Planning</h3>
 
         <div class="flex align-middle">
