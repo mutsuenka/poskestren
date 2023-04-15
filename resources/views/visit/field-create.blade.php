@@ -1,9 +1,9 @@
 <div class="flex justify-center align-middle gap-4 justify-items-center">
-    <div class="w-[50%] bg-gray-100 rounded-md p-4 place-content-center">
+    <div class="w-[50%] bg-gray-100 rounded-md p-4 items-center">
         <form method="post" action="{{ route('visit.store') }}" class="space-y-4">
             @csrf
             <h1 class="font-bold text-md text-center m-5">Pasien sudah ada? Pilih Pasien:</h1>
-            <div class="text-center m-5 w-[25em]">
+            <div class="mx-auto m-5 w-[70%]">
                 <select name="pasien" id="pasien"  class="w-full select2 left-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block">
                     <option value=""></option>
                     @foreach ($pasiens as $pasien)
@@ -128,9 +128,11 @@
                     kelamin = 'perempuan';
                 }
                 $('#jenis_kelamin').text(kelamin);
-                $('#nik').text(currentPasien.nik);
-                $('#phone').text(currentPasien.phone);
+                $('#nik').text(currentPasien.nik || '-');
+                $('#phone').text(currentPasien.phone|| '-');
                 $('#alamat').text(currentPasien.alamat);
+                $('#kategori').text(currentPasien.kategori);
+
 
             });
 
