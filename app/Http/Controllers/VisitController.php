@@ -214,6 +214,8 @@ class VisitController extends Controller
     {
         $input = $request->all();
 
+        $planningOrigin = $visit->planning;
+
         $visit->keluhan_utama = $input['keluhan_utama'];
         $visit->riwayat_penyakit_dulu = $input['riwayat_penyakit_dulu'];
         $visit->riwayat_penyakit_sekarang = $input['riwayat_penyakit_sekarang'];
@@ -233,7 +235,11 @@ class VisitController extends Controller
         $visit->nama_dokter = auth()->user()->name;
         $visit->save();
 
-        if ($visit->planning != $input['planning']) {
+
+
+        if ($planningOrigin != $input['planning']) {
+
+            // dd($planningOrigin, $input['planning']);
 
             $prescription = [
                 'nama_lengkap' => $visit->pasien->nama_lengkap,
