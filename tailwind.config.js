@@ -15,9 +15,6 @@ module.exports = {
             fontFamily: {
                 sans: ['arvo', ...defaultTheme.fontFamily.sans],
             },
-            screens: {
-                'xl': '1280px',
-            }
         },
     },
 
