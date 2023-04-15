@@ -16,7 +16,7 @@ module.exports = {
                 sans: ['arvo', ...defaultTheme.fontFamily.sans],
             },
             screens: {
-                'xl': '1440px',
+                'xl': '1280px',
             }
         },
     },
