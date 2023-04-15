@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\VisitExport;
+use App\Models\InfoPostren;
 use Carbon\Carbon;
 use App\Models\Visit;
 use App\Models\Pasien;
@@ -56,6 +57,13 @@ class VisitController extends Controller
             $visit['nama_status'] = $status[0]->nama_status;
             $visit['age'] = $age;
 
+        }
+
+
+        $lastUpdate = InfoPostren::where('id', 1)->value('last_visit_update');
+
+        if ($lastUpdate < Carbon::today() || is_null($lastUpdate)) {
+            self::updateDataNyangkut();
         }
 
         // dd($visits->count());
@@ -188,17 +196,11 @@ class VisitController extends Controller
             $view = 'visit.edit-visit';
 
             $riwayat_pasiens = Visit::where('pasien_id', $pasien->id)
+                ->where('status', 5)
                 ->latest()
                 ->skip(1)
                 ->take(3)
                 ->get();
-
-            // dd($riwayat_pasiens);
-
-            // foreach ($riwayat_pasiens as $riwayat_pasien) {
-            //     // dd($riwayat_pasien->planning);
-            //     $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
-            // }
 
             $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
         }
@@ -461,5 +463,17 @@ class VisitController extends Controller
         }
 
         return $visits;
+    }
+
+    static function updateDataNyangkut(): void
+    {
+        $today = Carbon::now();
+
+        Visit::where('created_at', '<', $today)
+            ->whereNotIn('status', [5,6])
+            ->update(['status' => 6]);
+
+        InfoPostren::where('id', 1)
+            ->update(['last_visit_update' => Carbon::now()]);
     }
 }
