@@ -38,6 +38,8 @@ class PasienController extends Controller
 
             $pasien->dob = Carbon::parse($pasien->dob)->translatedFormat('d F Y');
 
+            $pasien->jumlah_visit = Visit::where('pasien_id', $pasien->id)->get()->count();
+
         }
 
         $year = Carbon::now()->year;
@@ -171,6 +173,13 @@ class PasienController extends Controller
      */
     public function destroy(Pasien $pasien)
     {
+        $dataVisitPasien = Visit::where('pasien_id', $pasien->id)->get()->count();
+
+        if ($dataVisitPasien == 0) {
+            $pasien->delete();
+            return to_route('pasien.index')->with('status', 'success')->with('message', 'Data pasien berhasil dihapus');
+        }
+
         return to_route('pasien.index')->with('message', 'Data pasien tidak bisa dihapus');
     }
 
