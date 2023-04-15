@@ -62,7 +62,9 @@ class VisitController extends Controller
 
         $lastUpdate = InfoPostren::where('id', 1)->value('last_visit_update');
 
-        if ($lastUpdate < Carbon::today() || is_null($lastUpdate)) {
+        $lastUpdate = Carbon::parse($lastUpdate)->toDateString();
+
+        if ($lastUpdate != Carbon::today()->toDateString() || is_null($lastUpdate)) {
             self::updateDataNyangkut();
         }
 
@@ -467,9 +469,11 @@ class VisitController extends Controller
 
     static function updateDataNyangkut(): void
     {
-        $today = Carbon::now();
+        $today = Carbon::now()->toDateString();
 
-        Visit::where('created_at', '<', $today)
+        // dd($today != Visit::where('id',19)->value('tanggal_visit'));
+
+        Visit::where('tanggal_visit', '<>', $today)
             ->whereNotIn('status', [5,6])
             ->update(['status' => 6]);
 
