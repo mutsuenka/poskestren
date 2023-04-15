@@ -79,10 +79,12 @@ class VisitController extends Controller
                                 ->orWhere('no_rekam_medis', 'LIKE', '%'.$keyword.'%');
                         });
                 })
+                ->where('status', '<>', 6)
                 ->orderBy('id', 'DESC')
                 ->paginate(8);
         } else {
             $visits = Visit::orderBy('id', 'DESC')
+                ->where('status', '<>', 6)
                 ->paginate(5);
         }
 
@@ -154,10 +156,14 @@ class VisitController extends Controller
             ->take(3)
             ->get();
 
-        foreach ($riwayat_pasiens as $riwayat_pasien) {
-            // dd($riwayat_pasien->planning);
-            $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
-        }
+        // foreach ($riwayat_pasiens as $riwayat_pasien) {
+        //     // dd($riwayat_pasien->planning);
+        //     $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
+        //     $riwayat_pasien->keluhan_utama = str_replace("\n", "<br />", $riwayat_pasien->keluhan_utama);
+        //     $riwayat_pasien->riwayat_penyakit_dulu = str_replace("\n", "<br />", $riwayat_pasien->riwayat_penyakit_dulu).
+        // }
+
+        $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
 
         return view('visit.show', compact('visit', 'riwayat_pasiens'));
     }
@@ -189,10 +195,12 @@ class VisitController extends Controller
 
             // dd($riwayat_pasiens);
 
-            foreach ($riwayat_pasiens as $riwayat_pasien) {
-                // dd($riwayat_pasien->planning);
-                $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
-            }
+            // foreach ($riwayat_pasiens as $riwayat_pasien) {
+            //     // dd($riwayat_pasien->planning);
+            //     $riwayat_pasien->planning = str_replace("\n", "<br />", $riwayat_pasien->planning);
+            // }
+
+            $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
         }
 
         return view($view, compact('visit', 'riwayat_pasiens'));
@@ -350,11 +358,12 @@ class VisitController extends Controller
 
         $today = Carbon::today()->translatedFormat('d F Y');
 
+        $visits = self::convertToBr($visits);
+
         foreach ($visits as $visit) {
             $status = MasterStatusVisit::where('id', $visit->status)->get();
 
             $visit['nama_status'] = $status[0]->nama_status;
-
         }
 
         return view('visit.farmasi', compact('visits', 'today'));
@@ -430,5 +439,27 @@ class VisitController extends Controller
         $filename = 'DataVisit–'.Carbon::now()->format('YmdHi').'.xlsx';
 
         return Excel::download($visits, $filename);
+    }
+
+    public static function convertToBr($visits)
+    {
+        foreach ($visits as $visit) {
+            $visit->keluhan_utama = str_replace("\n", "<br />", $visit->keluhan_utama);
+            $visit->riwayat_penyakit_dulu = str_replace("\n", "<br />", $visit->riwayat_penyakit_dulu);
+            $visit->riwayat_penyakit_sekarang = str_replace("\n", "<br />", $visit->riwayat_penyakit_sekarang);
+            $visit->riwayat_penyakit_keluarga = str_replace("\n", "<br />", $visit->riwayat_penyakit_keluarga);
+            $visit->sg_kepala_leher = str_replace("\n", "<br />", $visit->sg_kepala_leher);
+            $visit->sg_thorax = str_replace("\n", "<br />", $visit->sg_thorax);
+            $visit->sg_cor = str_replace("\n", "<br />", $visit->sg_cor);
+            $visit->sg_pulmo = str_replace("\n", "<br />", $visit->sg_pulmo);
+            $visit->sg_abdomen = str_replace("\n", "<br />", $visit->sg_abdomen);
+            $visit->sg_ekstremitas = str_replace("\n", "<br />", $visit->sg_ekstremitas);
+            $visit->status_lokalis = str_replace("\n", "<br />", $visit->status_lokalis);
+            $visit->hasil_lab = str_replace("\n", "<br />", $visit->hasil_lab);
+            $visit->diagnosa = str_replace("\n", "<br />", $visit->diagnosa);
+            $visit->planning = str_replace("\n", "<br />", $visit->planning);
+        }
+
+        return $visits;
     }
 }
