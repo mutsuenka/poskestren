@@ -42,11 +42,14 @@ class VisitController extends Controller
                 ->paginate();
         }
 
+        $visitHariIni = Visit::where('tanggal_visit', Carbon:: today())
+            ->get();
+
         $visits->keyword = $keyword;
 
-        $totalPasien = count($visits);
+        $totalPasien = count($visitHariIni);
 
-        $totalPasienSelesai = $visits->where('status', 5)->count();
+        $totalPasienSelesai = $visitHariIni->where('status', 5)->count();
 
         $today = Carbon::today()->translatedFormat('d F Y');
 
@@ -200,12 +203,15 @@ class VisitController extends Controller
             $riwayat_pasiens = Visit::where('pasien_id', $pasien->id)
                 ->where('status', 5)
                 ->latest()
-                ->skip(1)
                 ->take(3)
                 ->get();
+            
+
 
             $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
         }
+
+        // dd($riwayat_pasiens);
 
         return view($view, compact('visit', 'riwayat_pasiens'));
     }
@@ -480,8 +486,12 @@ class VisitController extends Controller
         // dd($today != Visit::where('id',19)->value('tanggal_visit'));
 
         Visit::where('tanggal_visit', '<>', $today)
-            ->whereNotIn('status', [5,6])
+            ->whereNotIn('status', [4,5,6])
             ->update(['status' => 6]);
+
+        Visit::where('tanggal_visit', '<>', $today)
+            ->where('status', 4)
+            ->update(['status' => 5]);
 
         InfoPostren::where('id', 1)
             ->update(['last_visit_update' => Carbon::now()]);
