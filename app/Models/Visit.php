@@ -40,7 +40,8 @@ class Visit extends Model
         'sg_ekstremitas',
         'status_lokalis',
         'diagnosa',
-        'planning'
+        'planning',
+        'catatan'
     ];
 
     public function pasien()

@@ -25,7 +25,8 @@ class Pasien extends Model
         'status_kawin',
         'agama',
         'pendidikan',
-        'pekerjaan'
+        'pekerjaan',
+        'catatan_terakhir'
     ];
 
     public function visit()

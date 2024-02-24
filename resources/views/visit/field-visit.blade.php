@@ -107,6 +107,12 @@
             <x-input-error class="mt-2" :messages="$errors->get('planning')" />
         </div>
 
+        <div class="flex align-middle">
+            <x-input-label for="catatan" :value="__('Catatan')" class="w-48 mt-4" />
+            <x-text-area id="catatan" name="catatan" type="text" class="mt-1 block w-full" :value="old('catatan', $visit->catatan)" autofocus autocomplete="catatan"></x-text-area>
+            <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Catat Hasil Pemeriksaan') }}</x-primary-button>
         </div>

@@ -153,6 +153,10 @@ class VisitController extends Controller
 
         $visit_initial->save();
 
+        $visit_initial->pasien->catatan_terakhir = $visit_initial->pasien->catatan_mendatang;
+        $visit_initial->pasien->catatan_mendatang = NULL;
+        $visit_initial->pasien->save();
+
         return to_route('visit.index')->with('status', 'success')->with('message', 'Antrian dengan nomor antrian ' . $visit_initial->no_antrian . ' telah ditambahkan');
     }
 
@@ -205,7 +209,7 @@ class VisitController extends Controller
                 ->latest()
                 ->take(3)
                 ->get();
-            
+
 
 
             $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
@@ -235,11 +239,14 @@ class VisitController extends Controller
         $visit->status_lokalis = $input['status_lokalis'];
         $visit->diagnosa = $input['diagnosa'];
         $visit->planning = $input['planning'];
+        $visit->catatan = $input['catatan'] ?? NULL;
+        $visit->pasien->catatan_mendatang = $input['catatan'] ?? NULL;
         if ($visit->status <= 3) {
             $visit->status = 4;
         }
         $visit->nama_dokter = auth()->user()->name;
         $visit->save();
+        $visit->pasien->save();
 
 
 
