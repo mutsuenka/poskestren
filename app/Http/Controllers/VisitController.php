@@ -195,6 +195,8 @@ class VisitController extends Controller
 
         $visit->jenis_kelamin = $pasien->jenis_kelamin == 1 ? 'Laki-laki' : 'Perempuan';
 
+        $pasien->alergi = str_replace("\n", "<br />", $pasien->alergi);
+        $pasien->catatan_terakhir = str_replace("\n", "<br />", $pasien->catatan_terakhir);
 
 
         if ($type == 'vital') {
@@ -210,14 +212,12 @@ class VisitController extends Controller
                 ->take(3)
                 ->get();
 
-
-
             $riwayat_pasiens = self::convertToBR($riwayat_pasiens);
         }
 
         // dd($riwayat_pasiens);
 
-        return view($view, compact('visit', 'riwayat_pasiens'));
+        return view($view, compact('visit', 'riwayat_pasiens', 'pasien'));
     }
 
     public function updatePemeriksaan(Request $request, Visit $visit)
@@ -237,6 +237,7 @@ class VisitController extends Controller
         $visit->sg_abdomen = $input['sg_abdomen'];
         $visit->sg_ekstremitas = $input['sg_ekstremitas'];
         $visit->status_lokalis = $input['status_lokalis'];
+        $visit->hasil_lab = $input['hasil_lab'];
         $visit->diagnosa = $input['diagnosa'];
         $visit->planning = $input['planning'];
         $visit->catatan = $input['catatan'] ?? NULL;
